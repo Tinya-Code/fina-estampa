@@ -1,0 +1,97 @@
+{
+  "data": {
+    "restaurant": {
+      "name": "Fina Estampa Cieneguilla",
+      "slug": "fina-estampa-cieneguilla",
+      "template_id": "chifa",
+      "phone": "942235532",
+      "address": "Tambo Viejo - Cieneguilla, Lima, Perú",
+      "location": {
+        "lat": -12.113977,
+        "lng": -76.871191
+      }
+    },
+    "settings": {
+      "whatsapp_config": {
+        "number": "942235532",
+        "message_template": "Hola Fina Estampa Cieneguilla, quisiera ordenar:"
+      },
+      "display_config": {
+        "currency": "PEN",
+        "language": "es"
+      },
+      "order_config": {
+        "delivery_fee": 8.0,
+        "payment_methods": ["cash", "yape", "plin"],
+        "delivery_enabled": true,
+        "max_order_quantity": 20
+      },
+      "business_config": {
+        "social_media": {
+          "tiktok": "https://www.tiktok.com/@fina_estampa.restobar?is_from_webapp=1&sender_device=pc",
+          "facebook": "https://www.facebook.com/profile.php?id=61578311416144",
+          "instagram": "https://www.instagram.com/finaestampa_cieneguilla/"
+        },
+        "business_hours": {
+          "monday": {
+            "open": "08:00",
+            "close": "22:00",
+            "isOpen": true
+          },
+          "tuesday": {
+            "open": "08:00",
+            "close": "22:00",
+            "isOpen": true
+          },
+          "wednesday": {
+            "open": "08:00",
+            "close": "22:00",
+            "isOpen": true
+          },
+          "thursday": {
+            "open": "08:00",
+            "close": "22:00",
+            "isOpen": true
+          },
+          "friday": {
+            "open": "08:00",
+            "close": "22:00",
+            "isOpen": true
+          },
+          "saturday": {
+            "open": "08:00",
+            "close": "22:00",
+            "isOpen": true
+          },
+          "sunday": {
+            "open": "08:00",
+            "close": "20:00",
+            "isOpen": true
+          }
+        },
+        "delivery_zones": ["Cieneguilla", "Pachacamac", "Manchay"]
+      },
+      "description": "✨ Elegancia, sabor y excelencia ✨",
+      "tags": [
+        "chifa",
+        "comida china",
+        "peruano",
+        "tradicional",
+        "familiar",
+        "delivery",
+        "economico",
+        "chaufa",
+        "sopas",
+        "wantan",
+        "tallarines",
+        "pollo",
+        "cerdo",
+        "camarones",
+        "mariscos",
+        "yape",
+        "plin"
+      ],
+      "logo_url": "/favicon.png"
+    }
+  }
+}

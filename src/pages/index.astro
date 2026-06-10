@@ -1,11 +1,58 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
 ---
 
-<Layout>
-	<Welcome />
+<Layout
+  title="Inicio"
+  description="Bienvenido a Fina Estampa..."
+  keywords="restaurante, criollo, cieneguilla"
+>
+  <Hero
+    slides={[
+      {
+        image: "/images/portada-fina-estampa.png",
+        logo: "/fina-logo.svg",
+        title: "Fina Estampa",
+        subtitle: "Restaurante Criollo en Cieneguilla",
+        cta: {
+          text: "Ver Menú",
+          link: "/menu-desayunos-cocteles",
+          icon: "lucide:utensils",
+          variant: "primary",
+        },
+      },
+      {
+        image: "/images/portada-fina-estampa.png",
+        logo: "/fina-logo.svg",
+        title: "Sabor Tradicional",
+        subtitle: "Comida Peruana Auténtica",
+        cta: {
+          text: "Reservar",
+          link: "/contacto",
+          icon: "lucide:calendar",
+          variant: "primary",
+        },
+      },
+      {
+        image: "/images/portada-fina-estampa.png",
+        logo: "/fina-logo.svg",
+        title: "Ambiente Familiar",
+        subtitle: "Disfruta en Familia",
+        cta: {
+          text: "Contáctanos",
+          link: "/contacto",
+          icon: "lucide:phone",
+          variant: "primary",
+        },
+      },
+    ]}
+    autoSlide={true}
+    autoSlideInterval={5000}
+    height="h-screen"
+    overlay={true}
+    overlayOpacity={0.3}
+    showDots={true}
+    showArrows={true}
+  />
 </Layout>
