@@ -1,7 +1,6 @@
 ---
 import "../styles/global.css";
 import restaurantData from "../data/restaurant.json";
-import Header from "../components/Header.astro";
 
 interface SEOProps {
 	title: string;
@@ -10,13 +9,13 @@ interface SEOProps {
 	author?: string;
 	canonicalURL?: string;
 	ogImage?: string;
-	ogType?: 'website' | 'article' | 'product' | 'restaurant';
+	ogType?: "website" | "article" | "product" | "restaurant";
 	locale?: string;
 	alternateLocales?: string[];
 	noIndex?: boolean;
 	noFollow?: boolean;
 	structuredData?: Record<string, any>;
-	twitterCard?: 'summary' | 'summary_large_image' | 'app' | 'player';
+	twitterCard?: "summary" | "summary_large_image" | "app" | "player";
 	article?: {
 		publishedTime?: string;
 		modifiedTime?: string;
@@ -50,27 +49,29 @@ const defaultRestaurant = {
 	telephone: restaurantData.data.restaurant.phone,
 	address: {
 		streetAddress: restaurantData.data.restaurant.address,
-		addressLocality: 'Cieneguilla',
-		addressRegion: 'Lima',
-		addressCountry: 'PE',
+		addressLocality: "Cieneguilla",
+		addressRegion: "Lima",
+		addressCountry: "PE",
 	},
 	geo: {
 		latitude: restaurantData.data.restaurant.location.lat,
 		longitude: restaurantData.data.restaurant.location.lng,
 	},
-	priceRange: '$$',
+	priceRange: "$$",
 	servesCuisine: restaurantData.data.settings.tags,
-	openingHours: Object.entries(restaurantData.data.settings.business_config.business_hours)
+	openingHours: Object.entries(
+		restaurantData.data.settings.business_config.business_hours,
+	)
 		.filter(([_, hours]: [string, any]) => hours.isOpen)
 		.map(([day, hours]: [string, any]) => {
 			const dayMap: Record<string, string> = {
-				monday: 'Mo',
-				tuesday: 'Tu',
-				wednesday: 'We',
-				thursday: 'Th',
-				friday: 'Fr',
-				saturday: 'Sa',
-				sunday: 'Su',
+				monday: "Mo",
+				tuesday: "Tu",
+				wednesday: "We",
+				thursday: "Th",
+				friday: "Fr",
+				saturday: "Sa",
+				sunday: "Su",
 			};
 			return `${dayMap[day]} ${hours.open}-${hours.close}`;
 		}),
@@ -79,73 +80,79 @@ const defaultRestaurant = {
 const {
 	title,
 	description,
-	keywords = restaurantData.data.settings.tags.join(', '),
+	keywords = restaurantData.data.settings.tags.join(", "),
 	author = restaurantData.data.restaurant.name,
 	canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
-	ogImage = '/og-image.jpg',
-	ogType = 'website',
-	locale = 'es_PE',
-	alternateLocales = ['es'],
+	ogImage = "/og-image.jpg",
+	ogType = "website",
+	locale = "es_PE",
+	alternateLocales = ["es"],
 	noIndex = false,
 	noFollow = false,
 	structuredData,
-	twitterCard = 'summary_large_image',
+	twitterCard = "summary_large_image",
 	article,
 	restaurant: restaurantProp,
 } = Astro.props as SEOProps;
 
 // Merge default restaurant data with props (props override defaults)
-const restaurant = restaurantProp ? { ...defaultRestaurant, ...restaurantProp } : defaultRestaurant;
+const restaurant = restaurantProp
+	? { ...defaultRestaurant, ...restaurantProp }
+	: defaultRestaurant;
 
 const fullTitle = `${title} | Fina Estampa - Restaurante Criollo en Cieneguilla`;
 
 const robotsContent = [
-	noIndex ? 'noindex' : 'index',
-	noFollow ? 'nofollow' : 'follow',
-].join(', ');
+	noIndex ? "noindex" : "index",
+	noFollow ? "nofollow" : "follow",
+].join(", ");
 
 // Generate JSON-LD structured data
 let jsonLd: Record<string, any> = {};
 
 if (restaurant) {
 	jsonLd = {
-		'@context': 'https://schema.org',
-		'@type': 'Restaurant',
-		name: restaurant.name || 'Fina Estampa',
+		"@context": "https://schema.org",
+		"@type": "Restaurant",
+		name: restaurant.name || "Fina Estampa",
 		description: description,
 		url: canonicalURL,
 		telephone: restaurant.telephone,
 		priceRange: restaurant.priceRange,
 		servesCuisine: restaurant.servesCuisine,
 		openingHours: restaurant.openingHours,
-		address: restaurant.address ? {
-			'@type': 'PostalAddress',
-			...restaurant.address,
-		} : undefined,
-		geo: restaurant.geo ? {
-			'@type': 'GeoCoordinates',
-			latitude: restaurant.geo.latitude,
-			longitude: restaurant.geo.longitude,
-		} : undefined,
+		address: restaurant.address
+			? {
+					"@type": "PostalAddress",
+					...restaurant.address,
+				}
+			: undefined,
+		geo: restaurant.geo
+			? {
+					"@type": "GeoCoordinates",
+					latitude: restaurant.geo.latitude,
+					longitude: restaurant.geo.longitude,
+				}
+			: undefined,
 	};
 } else if (article) {
 	jsonLd = {
-		'@context': 'https://schema.org',
-		'@type': 'Article',
+		"@context": "https://schema.org",
+		"@type": "Article",
 		headline: title,
 		description: description,
 		url: canonicalURL,
 		datePublished: article.publishedTime,
 		dateModified: article.modifiedTime,
 		author: {
-			'@type': 'Person',
+			"@type": "Person",
 			name: article.author || author,
 		},
 	};
 } else {
 	jsonLd = {
-		'@context': 'https://schema.org',
-		'@type': 'WebSite',
+		"@context": "https://schema.org",
+		"@type": "WebSite",
 		name: fullTitle,
 		description: description,
 		url: canonicalURL,
@@ -158,36 +165,56 @@ if (structuredData) {
 ---
 
 <!doctype html>
-<html lang={locale.split('_')[0]}>
+<html lang={locale.split("_")[0]}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="generator" content={Astro.generator} />
-		
+
 		<!-- Basic SEO -->
 		<title>{fullTitle}</title>
 		<meta name="description" content={description} />
 		<meta name="keywords" content={keywords} />
 		<meta name="author" content={author} />
 		<link rel="canonical" href={canonicalURL} />
-		
+
 		<!-- Robots -->
 		<meta name="robots" content={robotsContent} />
-		
+
 		<!-- Language -->
-		<html lang={locale.split('_')[0]} />
-		{alternateLocales.map((altLocale) => (
-			<link rel="alternate" hreflang={altLocale} href={canonicalURL} />
-		))}
-		
+		<html lang={locale.split("_")[0]}></html>
+		{
+			alternateLocales.map((altLocale) => (
+				<link
+					rel="alternate"
+					hreflang={altLocale}
+					href={canonicalURL}
+				/>
+			))
+		}
+
 		<!-- Favicon -->
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+		<link
+			rel="apple-touch-icon"
+			sizes="180x180"
+			href="/apple-touch-icon.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="32x32"
+			href="/favicon-32x32.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="16x16"
+			href="/favicon-16x16.png"
+		/>
 		<link rel="manifest" href="/site.webmanifest" />
-		
+
 		<!-- Open Graph / Facebook -->
 		<meta property="og:type" content={ogType} />
 		<meta property="og:url" content={canonicalURL} />
@@ -195,43 +222,63 @@ if (structuredData) {
 		<meta property="og:description" content={description} />
 		<meta property="og:image" content={new URL(ogImage, Astro.site).href} />
 		<meta property="og:locale" content={locale} />
-		{alternateLocales.map((altLocale) => (
-			<meta property="og:locale:alternate" content={altLocale} />
-		))}
+		{
+			alternateLocales.map((altLocale) => (
+				<meta property="og:locale:alternate" content={altLocale} />
+			))
+		}
 		<meta property="og:site_name" content="Fina Estampa" />
-		
-		{article && (
-			<>
-				<meta property="article:published_time" content={article.publishedTime} />
-				<meta property="article:modified_time" content={article.modifiedTime} />
-				<meta property="article:author" content={article.author || author} />
-				{article.section && <meta property="article:section" content={article.section} />}
-				{article.tag?.map((tag) => (
-					<meta property="article:tag" content={tag} />
-				))}
-			</>
-		)}
-		
+
+		{
+			article && (
+				<>
+					<meta
+						property="article:published_time"
+						content={article.publishedTime}
+					/>
+					<meta
+						property="article:modified_time"
+						content={article.modifiedTime}
+					/>
+					<meta
+						property="article:author"
+						content={article.author || author}
+					/>
+					{article.section && (
+						<meta
+							property="article:section"
+							content={article.section}
+						/>
+					)}
+					{article.tag?.map((tag) => (
+						<meta property="article:tag" content={tag} />
+					))}
+				</>
+			)
+		}
+
 		<!-- Twitter -->
 		<meta name="twitter:card" content={twitterCard} />
 		<meta name="twitter:url" content={canonicalURL} />
 		<meta name="twitter:title" content={fullTitle} />
 		<meta name="twitter:description" content={description} />
-		<meta name="twitter:image" content={new URL(ogImage, Astro.site).href} />
-		
+		<meta
+			name="twitter:image"
+			content={new URL(ogImage, Astro.site).href}
+		/>
+
 		<!-- Additional SEO -->
 		<meta name="theme-color" content="#d97706" />
 		<meta name="msapplication-TileColor" content="#d97706" />
-		
+
 		<!-- Structured Data (JSON-LD) -->
 		<script set:html={JSON.stringify(jsonLd)} type="application/ld+json" />
-		
+
 		<!-- Preconnect for performance -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 	</head>
-	<body class="bg-gray-50">
-		<Header />
+	<body class="bg-gray-50 overflow-hidden max-w-screen h-full">
 		<slot />
 	</body>
 </html>

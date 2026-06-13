@@ -1,0 +1,89 @@
+<div class="relative w-full overflow-hidden h-[100svh] max-h-300">
+
+  <!-- Slides -->
+  @for (slide of slides(); track $index) {
+  <div class="absolute inset-0  duration-500 ease-in-out" [ngClass]="isActive($index)
+        ? ' z-10 '
+        : ' z-0 '">
+    <!-- Imagen de fondo -->
+    <img [src]="slide.image" [alt]="slide.title || 'Hero slide'" class="w-full h-full object-cover"
+      [attr.loading]="$index === 0 ? 'eager' : 'lazy'" />
+
+    <!-- Overlay oscuro -->
+    @if (overlay()) {
+    <div class="absolute inset-0 bg-black " [style.opacity]="overlayOpacity()"></div>
+    }
+
+    <!-- Contenido centrado -->
+    <div
+      class="absolute inset-0 flex items-center justify-center z-20 transition-[opacity,transform] duration-700 delay-400">
+      <div class="text-center px-6 max-w-4xl">
+
+        @if (slide.logo) {
+        <img [src]="slide.logo" alt="Logo" class="w-70 h-70  object-contain mx-auto" />
+        }
+
+        @if (slide.title) {
+        <h1
+          class="text-[clamp(2rem,7vw,4.5rem)] font-extrabold text-white mb-3 [text-shadow:0_2px_24px_rgba(0,0,0,0.7)] tracking-tight leading-[1.1]">
+          {{ slide.title }}
+        </h1>
+        }
+
+        @if (slide.subtitle) {
+        <h2
+          class="text-[clamp(1rem,3vw,1.75rem)] text-white/80 mb-4 [text-shadow:0_1px_12px_rgba(0,0,0,0.5)] font-normal">
+          {{ slide.subtitle }}
+        </h2>
+        }
+
+        @if (slide.description) {
+        <p class="text-[clamp(0.9rem,2vw,1.15rem)] text-white/70 max-w-[36rem] mx-auto mb-8 leading-[1.65]">
+          {{ slide.description }}
+        </p>
+        }
+
+        @if (slide.cta || slide.ctaSecondary) {
+        <div class="flex flex-col sm:flex-row gap-3 justify-center items-center">
+          @if (slide.cta) {
+          <a [href]="slide.cta.link"
+            class="inline-flex items-center gap-2 px-8 py-3 rounded-full font-semibold text-base no-underline cursor-pointer shadow-[0_4px_24px_rgba(0,0,0,0.35)] tracking-wide transition-[transform,box-shadow,filter] duration-200 hover:-translate-y-1 hover:scale-105 hover:shadow-[0_10px_36px_rgba(0,0,0,0.45)] hover:brightness-110"
+            [ngClass]="{
+                    'bg-gradient-to-br from-orange-700 to-orange-500 text-white': slide.cta.variant === 'primary' || !slide.cta.variant,
+                    'bg-gradient-to-br from-amber-800 to-amber-600 text-white': slide.cta.variant === 'secondary',
+                    'bg-white/10 border-2 border-white/85 text-white backdrop-blur-sm hover:bg-white/20': slide.cta.variant === 'outline'
+                  }">
+            {{ slide.cta.text }}
+          </a>
+          }
+          @if (slide.ctaSecondary) {
+          <a [href]="slide.ctaSecondary.link"
+            class="inline-flex items-center gap-2 px-8 py-3 rounded-full font-semibold text-base no-underline cursor-pointer shadow-[0_4px_24px_rgba(0,0,0,0.35)] tracking-wide transition-[transform,box-shadow,filter] duration-200 hover:-translate-y-1 hover:scale-105 hover:shadow-[0_10px_36px_rgba(0,0,0,0.45)] hover:brightness-110"
+            [ngClass]="{
+                    'bg-gradient-to-br from-orange-700 to-orange-500 text-white': slide.ctaSecondary.variant === 'primary' || !slide.ctaSecondary.variant,
+                    'bg-gradient-to-br from-amber-800 to-amber-600 text-white': slide.ctaSecondary.variant === 'secondary',
+                    'bg-white/10 border-2 border-white/85 text-white backdrop-blur-sm hover:bg-white/20': slide.ctaSecondary.variant === 'outline'
+                  }">
+            {{ slide.ctaSecondary.text }}
+          </a>
+          }
+        </div>
+        }
+
+      </div>
+    </div>
+  </div>
+  }
+
+  <!-- Dots indicadores (solo visual, sin botones) -->
+  @if (slides().length > 1) {
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-30 items-center">
+    @for (slide of slides(); track $index) {
+    <span class="block h-2 rounded-full transition-all duration-[400ms] ease-[cubic-bezier(0.4,0,0.2,1)]" [ngClass]="isActive($index)
+            ? 'w-7 bg-white shadow-[0_0_8px_rgba(255,255,255,0.5)]'
+            : 'w-2 bg-white/35'"></span>
+    }
+  </div>
+  }
+
+</div>

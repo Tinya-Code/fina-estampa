@@ -1,6 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Hero from "../components/Hero.astro";
+import Hero from "../share/components/Hero.astro";
+import RecommendedSection from "../share/sections/RecommendedSection.astro";
+import Header from "../share/components/Header.astro";
 ---
 
 <Layout
@@ -8,6 +10,7 @@ import Hero from "../components/Hero.astro";
   description="Bienvenido a Fina Estampa..."
   keywords="restaurante, criollo, cieneguilla"
 >
+  <Header />
   <Hero
     slides={[
       {
@@ -18,7 +21,6 @@ import Hero from "../components/Hero.astro";
         cta: {
           text: "Ver Menú",
           link: "/menu-desayunos-cocteles",
-          icon: "lucide:utensils",
           variant: "primary",
         },
       },
@@ -30,7 +32,6 @@ import Hero from "../components/Hero.astro";
         cta: {
           text: "Reservar",
           link: "/contacto",
-          icon: "lucide:calendar",
           variant: "primary",
         },
       },
@@ -42,17 +43,14 @@ import Hero from "../components/Hero.astro";
         cta: {
           text: "Contáctanos",
           link: "/contacto",
-          icon: "lucide:phone",
           variant: "primary",
         },
       },
     ]}
-    autoSlide={true}
     autoSlideInterval={5000}
-    height="h-screen"
     overlay={true}
-    overlayOpacity={0.3}
-    showDots={true}
-    showArrows={true}
+    overlayOpacity={0.35}
   />
+
+  <RecommendedSection />
 </Layout>

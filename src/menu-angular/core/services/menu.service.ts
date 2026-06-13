@@ -19,6 +19,7 @@ import priceRangesLocal from "../../../data/price_ranges.json";
 import promotionsLocal from "../../../data/promotions.json";
 import restaurantLocal from "../../../data/restaurant.json";
 import templateImagesLocal from "../../../data/template-images.json";
+import recommendedLocal from "../../../data/recommended.json";
 
 @Injectable({
   providedIn: "root",
@@ -231,6 +232,19 @@ export class MenuService {
         .pipe(catchError(() => of({ data: [] })));
     } else {
       return of(promotionsLocal as { data: any[] });
+    }
+  }
+
+  /**
+   * Get all recommended items.
+   */
+  getRecommended(): Observable<{ data: any[] }> {
+    if (this.useApi && this.http) {
+      return this.http
+        .get<{ data: any[] }>(`${this.apiUrl}?json=recommended`)
+        .pipe(catchError(() => of({ data: [] })));
+    } else {
+      return of(recommendedLocal as { data: any[] });
     }
   }
 }
