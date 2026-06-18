@@ -1,8 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Hero from "../share/components/Hero.astro";
-import RecommendedSection from "../share/sections/RecommendedSection.astro";
 import Header from "../share/components/Header.astro";
+import Hero from "../share/components/Hero.astro";
+import AboutSection from "../share/sections/home/AboutSection.astro";
+import BarSection from "../share/sections/home/BarSection.astro";
+import ContactSection from "../share/sections/home/ContactSection.astro";
+import EventSection from "../share/sections/home/EventSection.astro";
+import FoodSection from "../share/sections/home/FoodSection.astro";
 ---
 
 <Layout
@@ -51,6 +55,9 @@ import Header from "../share/components/Header.astro";
     overlay={true}
     overlayOpacity={0.35}
   />
-
-  <RecommendedSection />
+  <AboutSection />
+  <FoodSection />
+  <BarSection />
+  <EventSection />
+  <ContactSection />
 </Layout>
