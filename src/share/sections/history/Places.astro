@@ -1,0 +1,65 @@
+---
+import { Icon } from "astro-icon/components";
+
+const places = [
+  { icon: "lucide:map-pin", text: "Terreno de más de 2,000 m2" },
+  { icon: "lucide:layers", text: "2 niveles de ambientes" },
+  { icon: "lucide:tree-pine", text: "Amplias áreas verdes" },
+  { icon: "lucide:sun", text: "Salones y terrazas" },
+];
+
+const images = [
+  { src: "/images/portada-fina-estampa.png", alt: "Sobre Fina Estampa" },
+  { src: "/images/portada-fina-estampa.png", alt: "Ambiente Fina Estampa" },
+  { src: "/images/portada-fina-estampa.png", alt: "Sobre Fina Estampa" },
+  { src: "/images/portada-fina-estampa.png", alt: "Ambiente Fina Estampa" },
+];
+---
+
+<section
+  class="flex min-h-[calc(100dvh-70px)] bg-tertiary/10 py-6 px-0 md:py-12"
+>
+  <div class="flex max-w-6xl mx-auto">
+    <div class="grid col-span-1 md:grid-cols-12 gap-4 md:gap-16 items-center">
+      <div class="md:col-span-5 flex flex-col gap-4 px-4 md:px-0">
+        <h2
+          class="text-4xl md:text-5xl text-primary mb-8 font-serif tracking-wider"
+        >
+          Nuestro lugar
+        </h2>
+
+        <p class="text-xl leading-relaxed text-primary">
+          Ubicados en <strong><i>Inca Roca 8, Cieneguilla - Lima</i></strong> un entorno
+          natural privilegiado, nuestro local ha sido diseñado para brindar comodidad,
+          calidez y momentos inolvidables.
+        </p>
+        <ul class="text-xl leading-relaxed text-primary mb-6 space-y-3">
+          {
+            places.map((place) => (
+              <li class="flex items-center gap-3">
+                <Icon name={place.icon} class="w-5 h-5 shrink-0 text-primary" />
+                {place.text}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div class="md:col-span-7 h-full grid grid-cols-2 gap-2">
+        {
+          images.map((image) => (
+            <div class="group aspect-square relative">
+              <img
+                src={image.src}
+                alt={image.alt}
+                class="w-full h-full object-cover"
+              />
+              <span class="md:group-hover:opacity-100 md:opacity-0 absolute inset-0 p-2 bg-black/20 flex items-end italic text-white text-lg font-semibold transition-opacity duration-300">
+                {image.alt}
+              </span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
