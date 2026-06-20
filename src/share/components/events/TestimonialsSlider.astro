@@ -1,0 +1,270 @@
+---
+import { Icon } from "astro-icon/components";
+import Button from "../ui/button/Button.astro";
+
+interface Review {
+  id: number;
+  name: string;
+  event: string;
+  text: string;
+  image: string;
+  rating: number;
+}
+
+interface TestimonialsSliderProps {
+  title: string;
+  subtitle: string;
+  reviews: Review[];
+  cta: {
+    text: string;
+    link: string;
+  };
+}
+
+const { title, subtitle, reviews, cta }: TestimonialsSliderProps = Astro.props;
+
+// Google avatar background colors for placeholders
+const avatarColors = [
+  "bg-[#4285F4] text-white", // Blue
+  "bg-[#EA4335] text-white", // Red
+  "bg-[#FBBC05] text-white", // Yellow
+  "bg-[#34A853] text-white", // Green
+];
+
+const getInitials = (name: string) => {
+  return name
+    .split(" ")
+    .map((n) => n[0])
+    .join("")
+    .substring(0, 2)
+    .toUpperCase();
+};
+---
+
+<section class="py-20 bg-gray-50/70 overflow-hidden relative" id="testimonials">
+  <div class="container mx-auto px-4 relative z-10">
+    <!-- Header -->
+    <div class="text-center max-w-3xl mx-auto mb-12">
+      <div class="flex items-center justify-center gap-2 mb-3">
+        <!-- Google Logo SVG -->
+        <svg viewBox="0 0 24 24" width="22" height="22" class="w-5 h-5">
+          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" />
+          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
+        </svg>
+        <span class="text-gray-500 font-semibold text-xs tracking-wider uppercase">Opiniones de Clientes</span>
+      </div>
+      <h2 class="font-display text-3xl md:text-4xl text-gray-900 font-bold mb-4">
+        {title}
+      </h2>
+      <p class="font-body text-gray-600 max-w-xl mx-auto text-base">
+        {subtitle}
+      </p>
+
+      <!-- Google Rating Card -->
+      <div class="flex hidden md:flex flex-col sm:flex-row items-center justify-center gap-3 mt-6 bg-white border border-gray-200/80 rounded-full py-2 px-6 w-fit mx-auto shadow-sm">
+
+        <div class="flex items-center gap-0.5">
+          <span    class="text-xl font-bold text-gray-950 leading-none mr-1">4.9</span>
+          {Array.from({ length: 5 }).map(() => (
+            <Icon name="lucide:star" class="w-4 h-4 text-[#F4B400] fill-[#F4B400]" />
+          ))}
+        </div>
+        <span class="text-xs text-gray-500 font-medium border-t sm:border-t-0 sm:border-l border-gray-200 pt-1.5 sm:pt-0 sm:pl-3">
+          Calificación excelente en Google Maps (230+ reseñas)
+        </span>
+      </div>
+    </div>
+
+    <!-- Slider Carousel Window -->
+    <div class="max-w-7xl mx-auto relative px-4 md:px-12">
+      <!-- Carousel Outer Container -->
+      <div class="overflow-hidden testimonials-carousel-wrapper cursor-grab active:cursor-grabbing">
+        <!-- The Track containing the cards -->
+        <div class="flex transition-transform duration-500 ease-out testimonials-track">
+          {reviews.map((review, idx) => {
+            const avatarColorClass = avatarColors[idx % avatarColors.length];
+            const hasCustomImage = review.image && !review.image.includes("portada-fina-estampa");
+
+            return (
+              <div class="w-full md:w-1/2 lg:w-1/3 flex-shrink-0 px-3 flex">
+                <div class="bg-white border border-gray-200/70 rounded-2xl p-6 shadow-[0_2px_6px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.06)] transition-all duration-300 relative w-full flex flex-col justify-between hover:-translate-y-1">
+                  <div>
+                    <!-- Header: Name, Avatar, Google Icon -->
+                    <div class="flex items-start justify-between gap-3 mb-4">
+                      <div class="flex items-center gap-3">
+                        {hasCustomImage ? (
+                          <div class="w-11 h-11 rounded-full overflow-hidden bg-gray-100 flex-shrink-0 border border-gray-100">
+                            <img 
+                              src={review.image} 
+                              alt={review.name} 
+                              class="w-full h-full object-cover"
+                              loading="lazy"
+                            />
+                          </div>
+                        ) : (
+                          <div class={`w-11 h-11 rounded-full flex items-center justify-center font-display font-semibold text-base flex-shrink-0 ${avatarColorClass}`}>
+                            {getInitials(review.name)}
+                          </div>
+                        )}
+                        <div>
+                          <h4 class="font-display font-semibold text-gray-900 text-sm leading-snug">
+                            {review.name}
+                          </h4>
+                          <div class="flex items-center gap-1">
+                            <span class="text-[11px] text-[#5f6368] font-medium">Local Guide</span>
+                            <span class="text-gray-300 text-[10px]">•</span>
+                            <span class="text-[11px] text-[#5f6368]">Verificado</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <svg viewBox="0 0 24 24" width="16" height="16" class="w-4 h-4 opacity-80 mt-0.5">
+                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" />
+                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
+                      </svg>
+                    </div>
+
+                    <!-- Stars & Date -->
+                    <div class="flex items-center gap-1.5 mb-3">
+                      <div class="flex gap-0.5">
+                        {Array.from({ length: review.rating }).map(() => (
+                          <Icon name="lucide:star" class="w-3.5 h-3.5 text-[#F4B400] fill-[#F4B400]" />
+                        ))}
+                      </div>
+                      <span class="text-[11px] text-[#70757a]">Hace 3 semanas</span>
+                    </div>
+
+                    <!-- Text -->
+                    <p class="font-body text-[#3c4043] text-sm leading-relaxed mb-4">
+                      "{review.text}"
+                    </p>
+                  </div>
+
+                  <!-- Footer details -->
+                  <div class="border-t border-gray-100 pt-3 mt-auto">
+                    <div class="flex items-center justify-between">
+                      <span class="text-[11px] font-semibold text-primary/80 bg-primary/5 rounded px-2 py-0.5">
+                        {review.event}
+                      </span>
+                      <span class="text-[11px] text-gray-400">Google Maps</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <!-- Controls: Next & Prev buttons -->
+      <button 
+        class="absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white shadow border border-gray-200 text-gray-600 flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 disabled:opacity-40 disabled:pointer-events-none z-20 focus:outline-none -translate-x-2 md:-translate-x-4 hover:text-[#1a73e8]"
+        id="prev-testimonial"
+        aria-label="Anterior"
+      >
+        <Icon name="lucide:chevron-left" class="w-5 h-5" />
+      </button>
+      
+      <button 
+        class="absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white shadow border border-gray-200 text-gray-600 flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 disabled:opacity-40 disabled:pointer-events-none z-20 focus:outline-none translate-x-2 md:translate-x-4 hover:text-[#1a73e8]"
+        id="next-testimonial"
+        aria-label="Siguiente"
+      >
+        <Icon name="lucide:chevron-right" class="w-5 h-5" />
+      </button>
+
+      <!-- Indicator Dots -->
+      <div class="flex justify-center gap-1.5 mt-8" id="testimonials-dots">
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function initTestimonialsSlider() {
+    const track = document.querySelector('.testimonials-track') as HTMLElement;
+    const wrapper = document.querySelector('.testimonials-carousel-wrapper') as HTMLElement;
+    const slides = document.querySelectorAll('.testimonials-track > div');
+    const prevBtn = document.getElementById('prev-testimonial') as HTMLButtonElement;
+    const nextBtn = document.getElementById('next-testimonial') as HTMLButtonElement;
+    const dotsContainer = document.getElementById('testimonials-dots');
+    
+    if (!track || !slides.length || !prevBtn || !nextBtn || !dotsContainer) return;
+    
+    let currentIndex = 0;
+    let autoplayInterval: number | null = null;
+    
+    const getVisible = () => window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1;
+    const getMax = () => Math.max(0, slides.length - getVisible());
+    
+    const update = () => {
+      const max = getMax();
+      if (currentIndex > max) currentIndex = max;
+      
+      const visible = getVisible();
+      const percentage = currentIndex * (100 / visible);
+      track.style.transform = `translateX(-${percentage}%)`;
+      
+      prevBtn.disabled = currentIndex === 0;
+      nextBtn.disabled = currentIndex >= max;
+      
+      // Update dots - create based on pages, not individual slides
+      dotsContainer.innerHTML = '';
+      for (let i = 0; i <= max; i++) {
+        const dot = document.createElement('button');
+        dot.className = `w-2 h-2 rounded-full transition-all duration-300 focus:outline-none ${i === currentIndex ? 'bg-[#1a73e8] w-4' : 'bg-gray-300 hover:bg-gray-400'}`;
+        dot.ariaLabel = `Ir a página ${i + 1}`;
+        dot.onclick = () => {
+          stopAutoplay();
+          currentIndex = i;
+          update();
+          startAutoplay();
+        };
+        dotsContainer.appendChild(dot);
+      }
+    };
+    
+    const startAutoplay = () => {
+      stopAutoplay();
+      autoplayInterval = window.setInterval(() => {
+        currentIndex = currentIndex < getMax() ? currentIndex + 1 : 0;
+        update();
+      }, 4000);
+    };
+    
+    const stopAutoplay = () => {
+      if (autoplayInterval) clearInterval(autoplayInterval);
+      autoplayInterval = null;
+    };
+    
+    const navigate = (delta: number) => {
+      stopAutoplay();
+      currentIndex = Math.max(0, Math.min(getMax(), currentIndex + delta));
+      update();
+      startAutoplay();
+    };
+    
+    prevBtn.onclick = () => navigate(-1);
+    nextBtn.onclick = () => navigate(1);
+
+    let startX = 0;
+    if (wrapper) {
+      wrapper.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; }, { passive: true });
+      wrapper.addEventListener('touchend', (e) => {
+        const diff = startX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 50) navigate(diff > 0 ? 1 : -1);
+      }, { passive: true });
+    }
+
+    window.addEventListener('resize', update);
+    update();
+    startAutoplay();
+  }
+
+  document.addEventListener('astro:page-load', initTestimonialsSlider);
+  initTestimonialsSlider();
+</script>

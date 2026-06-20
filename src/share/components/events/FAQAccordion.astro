@@ -1,0 +1,213 @@
+---
+import { Icon } from "astro-icon/components";
+import SectionTitle from "../SectionTitle.astro";
+
+interface FAQItem {
+  id: string;
+  question: string;
+  answer: string;
+}
+
+interface FAQAccordionProps {
+  title: string;
+  subtitle: string;
+  questions: FAQItem[];
+}
+
+const { title, subtitle, questions }: FAQAccordionProps = Astro.props;
+---
+
+<section class="py-10 bg-background faq-accordion-section">
+  <div class="container mx-auto px-4">
+    <!-- Section Header -->
+
+    <SectionTitle
+      title={title}
+      subtitle={subtitle}
+      align="center"
+      className="mb-12"
+    />
+
+    <!-- Pinterest Masonry style with staggered columns for organic layout -->
+    <div
+      class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 accordion-container items-start pb-20"
+    >
+      {/* Column 1 */}
+      <div class="flex flex-col gap-4 transition-transform duration-300">
+        {
+          questions
+            .filter((_, i) => i % 3 === 0)
+            .map((item) => (
+              <div class="bg-white/80 backdrop-blur-sm rounded-sm shadow-sm border border-gray-100/80 overflow-hidden hover:-translate-y-1.5 hover:shadow-lg hover:shadow-primary/5 hover:border-primary/20 transition-all duration-300 group">
+                <button
+                  class="w-full px-6 py-6 flex items-center justify-between text-left transition-colors gap-4"
+                  aria-expanded={item.id === questions[0].id ? "true" : "false"}
+                  data-accordion-btn
+                >
+                  <span class="font-display font-bold text-gray-800 text-base md:text-lg tracking-tight group-hover:text-primary transition-colors">
+                    {item.question}
+                  </span>
+                  <div
+                    class={`w-8 h-8 rounded-full bg-primary/5 text-primary flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
+                      item.id === questions[0].id
+                        ? "rotate-180 bg-primary text-primary"
+                        : ""
+                    }`}
+                    data-accordion-icon
+                  >
+                    <Icon name="lucide:chevron-down" class="w-4 h-4" />
+                  </div>
+                </button>
+
+                <div
+                  class={`grid transition-all duration-300 ease-in-out px-6 ${
+                    item.id === questions[0].id
+                      ? "grid-rows-[1fr] opacity-100"
+                      : "grid-rows-[0fr] opacity-0"
+                  }`}
+                  data-accordion-content
+                >
+                  <div class="overflow-hidden">
+                    <p class="font-body select-none text-gray-600 pb-6 leading-relaxed text-sm md:text-base border-t border-gray-50 pt-4">
+                      {item.answer}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))
+        }
+      </div>
+
+      {/* Column 2 - Staggered offset */}
+      <div
+        class="flex flex-col gap-4 md:translate-y-8 transition-transform duration-300"
+      >
+        {
+          questions
+            .filter((_, i) => i % 3 === 1)
+            .map((item) => (
+              <div class="bg-white/80 backdrop-blur-sm rounded-sm shadow-sm border border-gray-100/80 overflow-hidden hover:-translate-y-1.5 hover:shadow-lg hover:shadow-primary/5 hover:border-primary/20 transition-all duration-300 group">
+                <button
+                  class="w-full px-6 py-6 flex items-center justify-between text-left transition-colors gap-4"
+                  aria-expanded="false"
+                  data-accordion-btn
+                >
+                  <span class="font-display font-bold text-gray-800 text-base md:text-lg tracking-tight group-hover:text-primary transition-colors">
+                    {item.question}
+                  </span>
+                  <div
+                    class="w-8 h-8 rounded-full bg-primary/5 text-primary flex items-center justify-center flex-shrink-0 transition-all duration-300"
+                    data-accordion-icon
+                  >
+                    <Icon name="lucide:chevron-down" class="w-4 h-4" />
+                  </div>
+                </button>
+
+                <div
+                  class="grid transition-all duration-300 ease-in-out px-6 grid-rows-[0fr] opacity-0"
+                  data-accordion-content
+                >
+                  <div class="overflow-hidden">
+                    <p class="font-body select-none text-gray-600 pb-6 leading-relaxed text-sm md:text-base border-t border-gray-50 pt-4">
+                      {item.answer}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))
+        }
+      </div>
+
+      {/* Column 3 - Staggered offset */}
+      <div
+        class="flex flex-col gap-4 lg:translate-y-16 transition-transform duration-300"
+      >
+        {
+          questions
+            .filter((_, i) => i % 3 === 2)
+            .map((item) => (
+              <div class="bg-white/80 backdrop-blur-sm rounded-sm shadow-sm border border-gray-100/80 overflow-hidden hover:-translate-y-1.5 hover:shadow-lg hover:shadow-primary/5 hover:border-primary/20 transition-all duration-300 group">
+                <button
+                  class="w-full px-6 py-6 flex items-center justify-between text-left transition-colors gap-4"
+                  aria-expanded="false"
+                  data-accordion-btn
+                >
+                  <span class="font-display font-bold text-gray-800 text-base md:text-lg tracking-tight group-hover:text-primary transition-colors">
+                    {item.question}
+                  </span>
+                  <div
+                    class="w-8 h-8 rounded-full bg-primary/5 text-primary flex items-center justify-center flex-shrink-0 transition-all duration-300"
+                    data-accordion-icon
+                  >
+                    <Icon name="lucide:chevron-down" class="w-4 h-4" />
+                  </div>
+                </button>
+
+                <div
+                  class="grid transition-all duration-300 ease-in-out px-6 grid-rows-[0fr] opacity-0"
+                  data-accordion-content
+                >
+                  <div class="overflow-hidden">
+                    <p class="font-body select-none text-gray-600 pb-6 leading-relaxed text-sm md:text-base border-t border-gray-50 pt-4">
+                      {item.answer}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function setupFAQAccordion() {
+    const sections = document.querySelectorAll(".faq-accordion-section");
+
+    sections.forEach((section) => {
+      const items = section.querySelectorAll(
+        ".accordion-container > div > div",
+      );
+
+      items.forEach((item) => {
+        const button = item.querySelector("[data-accordion-btn]");
+        const content = item.querySelector("[data-accordion-content]");
+        const icon = item.querySelector("[data-accordion-icon]");
+
+        button?.addEventListener("click", () => {
+          const isExpanded = button.getAttribute("aria-expanded") === "true";
+
+          // Close all accordions in this section first
+          items.forEach((otherItem) => {
+            const otherBtn = otherItem.querySelector("[data-accordion-btn]");
+            const otherContent = otherItem.querySelector(
+              "[data-accordion-content]",
+            );
+            const otherIcon = otherItem.querySelector("[data-accordion-icon]");
+
+            otherBtn?.setAttribute("aria-expanded", "false");
+            otherContent?.classList.replace(
+              "grid-rows-[1fr]",
+              "grid-rows-[0fr]",
+            );
+            otherContent?.classList.replace("opacity-100", "opacity-0");
+            otherIcon?.classList.remove("rotate-180");
+          });
+
+          // Open the clicked one if it was closed
+          if (!isExpanded) {
+            button.setAttribute("aria-expanded", "true");
+            content?.classList.replace("grid-rows-[0fr]", "grid-rows-[1fr]");
+            content?.classList.replace("opacity-0", "opacity-100");
+            icon?.classList.add("rotate-180");
+          }
+        });
+      });
+    });
+  }
+
+  // Setup on page loads
+  document.addEventListener("astro:page-load", setupFAQAccordion);
+  setupFAQAccordion();
+</script>

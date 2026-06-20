@@ -1,0 +1,104 @@
+{
+  "images": [
+    {
+      "src": "/images/eventos/event-1.webp",
+      "title": "Boda Elegante",
+      "alt": "Decoración de boda elegante al aire libre"
+    },
+    {
+      "src": "/images/eventos/event-2.webp",
+      "title": "Reunión Familiar",
+      "alt": "Familia disfrutando en la terraza de Fina Estampa"
+    },
+    {
+      "src": "/images/eventos/event-3.webp",
+      "title": "Cena Romántica",
+      "alt": "Mesa decorada para cena romántica en el jardín"
+    },
+    {
+      "src": "/images/eventos/event-4.webp",
+      "title": "Evento Corporativo",
+      "alt": "Presentación corporativa en nuestro salón principal"
+    },
+    {
+      "src": "/images/eventos/event-5.webp",
+      "title": "Celebración de Cumpleaños",
+      "alt": "Mesa de dulces para fiesta de cumpleaños"
+    },
+    {
+      "src": "/images/eventos/event-6.webp",
+      "title": "Almuerzo Campestre",
+      "alt": "Invitados compartiendo un almuerzo en el jardín"
+    },
+    {
+      "src": "/images/eventos/event-7.webp",
+      "title": "Aniversario Especial",
+      "alt": "Celebración de aniversario en el patio interior"
+    },
+    {
+      "src": "/images/eventos/event-8.webp",
+      "title": "Degustación de Vinos",
+      "alt": "Mesa de cata y degustación de vinos"
+    },
+    {
+      "src": "/images/eventos/event-9.webp",
+      "title": "Buffet Peruano",
+      "alt": "Estación de comida criolla peruana"
+    },
+    {
+      "src": "/images/eventos/event-10.webp",
+      "title": "Cóctel de Bienvenida",
+      "alt": "Bebidas y pasapalos en el bar de la terraza"
+    },
+    {
+      "src": "/images/eventos/event-11.webp",
+      "title": "Fiesta Temática",
+      "alt": "Decoración y luces para fiesta temática de noche"
+    },
+    {
+      "src": "/images/eventos/event-12.webp",
+      "title": "Brunch Dominical",
+      "alt": "Estación de brunch al aire libre"
+    },
+    {
+      "src": "/images/eventos/event-13.webp",
+      "title": "Baby Shower",
+      "alt": "Decoración pastel para baby shower"
+    },
+    {
+      "src": "/images/eventos/event-14.webp",
+      "title": "Tarde de Parrilla",
+      "alt": "Parrilla y carnes preparadas en caja china"
+    },
+    {
+      "src": "/images/eventos/event-15.webp",
+      "title": "Ceremonia Civil",
+      "alt": "Altar decorado para boda civil"
+    },
+    {
+      "src": "/images/eventos/event-16.webp",
+      "title": "Música en Vivo",
+      "alt": "Banda tocando en vivo en los jardines"
+    },
+    {
+      "src": "/images/eventos/event-17.webp",
+      "title": "Almuerzo de Trabajo",
+      "alt": "Reunión ejecutiva con servicio de almuerzo"
+    },
+    {
+      "src": "/images/eventos/event-18.webp",
+      "title": "Fiesta infantil",
+      "alt": "Juegos y decoraciones infantiles en el césped"
+    },
+    {
+      "src": "/images/eventos/event-19.webp",
+      "title": "Mesa de Postres",
+      "alt": "Variedad de postres tradicionales peruanos"
+    },
+    {
+      "src": "/images/eventos/event-20.webp",
+      "title": "Brindis de Fin de Año",
+      "alt": "Invitados brindando en celebración corporativa"
+    }
+  ]
+}

@@ -5,37 +5,77 @@
         "id": "block-1",
         "categories": [
           {
-            "id": "cat-entradas",
-            "name": "Entradas",
+            "id": "cat-entradas-piqueos",
+            "name": "Entradas y Piqueos",
             "description": "",
             "block_id": "block-1",
             "products": [
               {
-                "id": "prod-bolicausas",
-                "name": "Bolicausas",
-                "description": "Causitas limeñas en forma de bocado, rellenas de pollo y coronadas con ají y huevo.",
-                "price": 15,
+                "id": "prod-anticuchos-corazon",
+                "name": "Anticuchos de corazón",
+                "description": "Clásico anticucho peruano de corazón de res.",
+                "price": 20,
+                "is_recommended": true,
+                "is_hidden": false,
+                "image_url": "",
+                "cloudinary_id": ""
+              },
+              {
+                "id": "prod-lomo-anticuchero",
+                "name": "Lomo fino anticuchero",
+                "description": "Brochetas de lomo fino con salsa anticuchera.",
+                "price": 38,
                 "is_recommended": false,
                 "is_hidden": false,
                 "image_url": "",
                 "cloudinary_id": ""
               },
               {
-                "id": "prod-leche-de-tigre",
-                "name": "Leche de Tigre",
-                "description": "Fondo cítrico y picante de ceviche, servido bien frío con trozos de pescado, cancha y choclo.",
-                "price": 18,
+                "id": "prod-piqueo-fina",
+                "name": "Piqueo La Fina",
+                "description": "Selección variada de piqueos criollos.",
+                "price": 30,
                 "is_recommended": true,
                 "is_hidden": false,
                 "image_url": "",
                 "cloudinary_id": ""
               },
               {
-                "id": "prod-papa-huancaina",
-                "name": "Papa a la Huancaína",
-                "description": "Papas sancochadas bañadas en cremosa salsa de ají amarillo con queso, servidas con huevo y aceituna.",
-                "price": 10,
-                "is_recommended": true,
+                "id": "prod-tequenos-queso",
+                "name": "Tequeños con queso",
+                "description": "Crujientes tequeños rellenos de queso.",
+                "price": 12,
+                "is_recommended": false,
+                "is_hidden": false,
+                "image_url": "",
+                "cloudinary_id": ""
+              },
+              {
+                "id": "prod-alitas-bbq",
+                "name": "Alitas a la BBQ/Acevichada",
+                "description": "Alitas de pollo en salsa BBQ o acevichada.",
+                "price": 22,
+                "is_recommended": false,
+                "is_hidden": false,
+                "image_url": "",
+                "cloudinary_id": ""
+              },
+              {
+                "id": "prod-salchipapa-fina",
+                "name": "Salchipapa La Fina",
+                "description": "Clásica salchipapa con estilo criollo.",
+                "price": 20,
+                "is_recommended": false,
+                "is_hidden": false,
+                "image_url": "",
+                "cloudinary_id": ""
+              },
+              {
+                "id": "prod-hamburguesa-carne",
+                "name": "Hamburguesa de carne",
+                "description": "Hamburguesa artesanal de carne.",
+                "price": 18,
+                "is_recommended": false,
                 "is_hidden": false,
                 "image_url": "",
                 "cloudinary_id": ""
@@ -48,16 +88,66 @@
         "id": "block-2",
         "categories": [
           {
-            "id": "cat-sopas",
-            "name": "Sopas",
+            "id": "cat-fondos",
+            "name": "Fondos",
             "description": "",
             "block_id": "block-2",
             "products": [
               {
-                "id": "prod-sopa-dieta",
-                "name": "Sopa de Dieta",
-                "description": "Caldo ligero con verduras frescas, fideo cabello de ángel y pollo, ideal para una comida saludable y reconfortante.",
-                "price": 20,
+                "id": "prod-bisteck-pobre",
+                "name": "Bisteck a lo pobre",
+                "description": "Bisteck acompañado de plátano, huevo y arroz.",
+                "price": 28,
+                "is_recommended": true,
+                "is_hidden": false,
+                "image_url": "",
+                "cloudinary_id": ""
+              },
+              {
+                "id": "prod-chaufa-amazonico-cocona",
+                "name": "Chaufa Amazónico con ají de cocona",
+                "description": "Arroz chaufa con sabores amazónicos y ají de cocona.",
+                "price": 35,
+                "is_recommended": false,
+                "is_hidden": false,
+                "image_url": "",
+                "cloudinary_id": ""
+              },
+              {
+                "id": "prod-lomo-saltado-clasico",
+                "name": "Lomo saltado clásico",
+                "description": "Tradicional lomo saltado con papas y arroz.",
+                "price": 35,
+                "is_recommended": true,
+                "is_hidden": false,
+                "image_url": "",
+                "cloudinary_id": ""
+              },
+              {
+                "id": "prod-arroz-mariscos",
+                "name": "Arroz con mariscos",
+                "description": "Arroz meloso con mariscos frescos.",
+                "price": 35,
+                "is_recommended": false,
+                "is_hidden": false,
+                "image_url": "",
+                "cloudinary_id": ""
+              },
+              {
+                "id": "prod-ceviche-carretillero",
+                "name": "Ceviche carretillero",
+                "description": "Ceviche popular con pesca del día.",
+                "price": 30,
+                "is_recommended": true,
+                "is_hidden": false,
+                "image_url": "",
+                "cloudinary_id": ""
+              },
+              {
+                "id": "prod-lomo-mar-tierra",
+                "name": "Lomo mar y tierra",
+                "description": "Lomo acompañado de mariscos.",
+                "price": 40,
                 "is_recommended": true,
                 "is_hidden": false,
                 "image_url": "",
@@ -71,95 +161,25 @@
         "id": "block-3",
         "categories": [
           {
-            "id": "cat-principales",
-            "name": "Principales",
+            "id": "cat-sopas",
+            "name": "Sopas",
             "description": "",
             "block_id": "block-3",
             "products": [
               {
-                "id": "prod-chancho-caja-china",
-                "name": "Chancho a la Caja China",
-                "description": "300 Grm de Panceta de Cerdo + Papas nativas + Cholo tierno + Sarsa Criolla.",
-                "price": 30,
-                "is_recommended": true,
-                "is_hidden": false,
-                "image_url": "",
-                "cloudinary_id": ""
-              },
-              {
-                "id": "prod-fetuccini-huancaina",
-                "name": "Fetuccini a la Huancaína c/Lomo Saltado",
-                "description": "Lomo fino salteado al Wok con Fetuccini en salsa Huancaína.",
-                "price": 35,
+                "id": "prod-crema-zapallo",
+                "name": "Crema de zapallo",
+                "description": "Sopa cremosa de zapallo.",
+                "price": 20,
                 "is_recommended": false,
                 "is_hidden": false,
                 "image_url": "",
                 "cloudinary_id": ""
               },
               {
-                "id": "prod-arroz-pato",
-                "name": "Arroz con Pato",
-                "description": "1/4 de Pato tierno macerado en Chicha de Jora y especias del Norte + Sarsa criolla.",
-                "price": 40,
-                "is_recommended": true,
-                "is_hidden": false,
-                "image_url": "",
-                "cloudinary_id": ""
-              },
-              {
-                "id": "prod-chaufa-amazonico",
-                "name": "Chaufa Amazónico",
-                "description": "Cecina y Chorizo amazónico salteados al wok + ensalada de cocona + plátano maduro.",
-                "price": 25,
-                "is_recommended": false,
-                "is_hidden": false,
-                "image_url": "",
-                "cloudinary_id": ""
-              },
-              {
-                "id": "prod-lomo-saltado",
-                "name": "Lomo Saltado",
-                "description": "Jugoso Lomo fino flambead al Wok + arroz con cholito + papas tumbay.",
-                "price": 40,
-                "is_recommended": true,
-                "is_hidden": false,
-                "image_url": "",
-                "cloudinary_id": ""
-              },
-              {
-                "id": "prod-seco-nortena",
-                "name": "Seco a la Norteña",
-                "description": "Costillar de res con cocción de 4 horas en salsa Norteña + acompañamiento de frejoles tradición de casa + Sarsa criolla.",
-                "price": 30,
-                "is_recommended": true,
-                "is_hidden": false,
-                "image_url": "",
-                "cloudinary_id": ""
-              },
-              {
-                "id": "prod-ceviche-carretillero",
-                "name": "Ceviche Carretillero",
-                "description": "Pesca del día + Chicharrón de pota.",
-                "price": 30,
-                "is_recommended": true,
-                "is_hidden": false,
-                "image_url": "",
-                "cloudinary_id": ""
-              },
-              {
-                "id": "prod-arroz-mariscos",
-                "name": "Arroz con Mariscos",
-                "description": "Arroz y Mariscos en punto meloso.",
-                "price": 35,
-                "is_recommended": false,
-                "is_hidden": false,
-                "image_url": "",
-                "cloudinary_id": ""
-              },
-              {
-                "id": "prod-aji-gallina",
-                "name": "Ají de Gallina",
-                "description": "Pollo deshilachado en suave crema de Ají amarillo + guarnición de arroz + papa + huevo duro.",
+                "id": "prod-dieta-pollo",
+                "name": "Dieta de pollo",
+                "description": "Caldo ligero de pollo con verduras.",
                 "price": 20,
                 "is_recommended": true,
                 "is_hidden": false,
@@ -167,29 +187,9 @@
                 "cloudinary_id": ""
               },
               {
-                "id": "prod-carapulcra-sopa-seca",
-                "name": "Carapulcra con Sopa Seca",
-                "description": "Fusión tradicional de fideos al ají panca con cerdo guisado en papa seca y especias andinas.",
-                "price": 28,
-                "is_recommended": false,
-                "is_hidden": false,
-                "image_url": "",
-                "cloudinary_id": ""
-              },
-              {
-                "id": "prod-arroz-pollo",
-                "name": "Arroz con Pollo",
-                "description": "Clásico criollo de arroz verde al culantro con pollo dorado + sarsa criolla + papa a la huancaína.",
-                "price": 20,
-                "is_recommended": true,
-                "is_hidden": false,
-                "image_url": "",
-                "cloudinary_id": ""
-              },
-              {
-                "id": "prod-pollo-cilindro",
-                "name": "Pollo al Cilindro",
-                "description": "1/4 de Pollo + Papas nativas al horno o papas fritas + ensalada campesina.",
+                "id": "prod-sopa-minuta",
+                "name": "Sopa a la minuta",
+                "description": "Sopa rápida con carne y fideos.",
                 "price": 25,
                 "is_recommended": false,
                 "is_hidden": false,
@@ -204,16 +204,90 @@
         "id": "block-4",
         "categories": [
           {
-            "id": "cat-postres",
-            "name": "Postres",
+            "id": "cat-kids",
+            "name": "Menú Kids",
             "description": "",
             "block_id": "block-4",
             "products": [
               {
-                "id": "prod-picarones",
-                "name": "Picarones",
-                "description": "Delicados anillos de zapallo y camote, fritos a la perfección y glaseados con miel artesanal de chancaca.",
-                "price": 10,
+                "id": "prod-chicharron-pollo",
+                "name": "Chicharrón del pollo",
+                "description": "Porción de pollo frito para niños.",
+                "price": 18,
+                "is_recommended": false,
+                "is_hidden": false,
+                "image_url": "",
+                "cloudinary_id": ""
+              },
+              {
+                "id": "prod-milanesa-pollo",
+                "name": "Milanesa de pollo",
+                "description": "Filete de pollo empanizado.",
+                "price": 18,
+                "is_recommended": false,
+                "is_hidden": false,
+                "image_url": "",
+                "cloudinary_id": ""
+              },
+              {
+                "id": "prod-nuggets-pollo",
+                "name": "Nuggets de pollo",
+                "description": "Nuggets de pollo crocantes.",
+                "price": 18,
+                "is_recommended": false,
+                "is_hidden": false,
+                "image_url": "",
+                "cloudinary_id": ""
+              }
+            ]
+          }
+        ]
+      },
+
+      {
+        "id": "block-5",
+        "categories": [
+          {
+            "id": "cat-pastas",
+            "name": "Pastas",
+            "description": "",
+            "block_id": "block-5",
+            "products": [
+              {
+                "id": "prod-spaguetti-alfredo-milanesa",
+                "name": "Spaguetti al Alfredo con milanesa de la casa",
+                "description": "Spaguetti en salsa Alfredo acompañado de milanesa de pollo.",
+                "price": 25,
+                "is_recommended": false,
+                "is_hidden": false,
+                "image_url": "",
+                "cloudinary_id": ""
+              },
+              {
+                "id": "prod-spaguetti-pesto-churrasco",
+                "name": "Spaguetti al pesto con churrasco",
+                "description": "Spaguetti en salsa pesto acompañado de churrasco.",
+                "price": 25,
+                "is_recommended": false,
+                "is_hidden": false,
+                "image_url": "",
+                "cloudinary_id": ""
+              },
+              {
+                "id": "prod-fetuccini-alfredo-lomo",
+                "name": "Fetuccini al Alfredo con medallón de lomo",
+                "description": "Fetuccini en salsa Alfredo acompañado de medallón de lomo.",
+                "price": 35,
+                "is_recommended": false,
+                "is_hidden": false,
+                "image_url": "",
+                "cloudinary_id": ""
+              },
+              {
+                "id": "prod-fetuccini-huancaina-lomo",
+                "name": "Fetuccini en salsa a la huancaína con lomo saltado",
+                "description": "Fetuccini en salsa huancaína acompañado de lomo saltado.",
+                "price": 35,
                 "is_recommended": true,
                 "is_hidden": false,
                 "image_url": "",
@@ -224,78 +298,18 @@
         ]
       },
       {
-        "id": "block-5",
+        "id": "block-6",
         "categories": [
           {
-            "id": "cat-bebidas",
-            "name": "Bebidas",
+            "id": "cat-calientes",
+            "name": "Calientes",
             "description": "",
-            "block_id": "block-5",
+            "block_id": "block-6",
             "products": [
               {
-                "id": "prod-limonada-natural",
-                "name": "Limonada Natural",
-                "description": "Jarra de 1 litro.",
-                "price": 15,
-                "is_recommended": false,
-                "is_hidden": false,
-                "image_url": "",
-                "cloudinary_id": ""
-              },
-              {
-                "id": "prod-jarra-maracuya",
-                "name": "Jarra de Maracuyá",
-                "description": "Jarra de 1 litro.",
-                "price": 15,
-                "is_recommended": false,
-                "is_hidden": false,
-                "image_url": "",
-                "cloudinary_id": ""
-              },
-              {
-                "id": "prod-jarra-chicha-morada",
-                "name": "Jarra de Chicha Morada",
-                "description": "Jarra de 1 litro.",
-                "price": 15,
-                "is_recommended": false,
-                "is_hidden": false,
-                "image_url": "",
-                "cloudinary_id": ""
-              },
-              {
-                "id": "prod-limonada-frozen",
-                "name": "Limonada Frozen",
-                "description": "Opcional Granadina.",
-                "price": 20,
-                "is_recommended": true,
-                "is_hidden": false,
-                "image_url": "",
-                "cloudinary_id": ""
-              },
-              {
-                "id": "prod-maracuya-frozen",
-                "name": "Maracuyá Frozen",
-                "description": "Jarra de 1 litro.",
-                "price": 20,
-                "is_recommended": true,
-                "is_hidden": false,
-                "image_url": "",
-                "cloudinary_id": ""
-              },
-              {
-                "id": "prod-agua",
-                "name": "Agua",
-                "description": "Con gas y sin gas.",
-                "price": 3,
-                "is_recommended": false,
-                "is_hidden": false,
-                "image_url": "",
-                "cloudinary_id": ""
-              },
-              {
-                "id": "prod-gaseosa-personal",
-                "name": "Gaseosa personal",
-                "description": "Coca Cola / Inca Kola.",
+                "id": "prod-cafe-pasado",
+                "name": "Café pasado",
+                "description": "Café tradicional peruano.",
                 "price": 5,
                 "is_recommended": false,
                 "is_hidden": false,
@@ -303,20 +317,83 @@
                 "cloudinary_id": ""
               },
               {
-                "id": "prod-gaseosa-15lt",
-                "name": "Gaseosa 1.5 Lt",
-                "description": "Coca Cola / Inca Kola.",
-                "price": 15,
+                "id": "prod-cafe-leche",
+                "name": "Café con leche",
+                "description": "Café acompañado con leche.",
+                "price": 7,
                 "is_recommended": false,
                 "is_hidden": false,
                 "image_url": "",
                 "cloudinary_id": ""
               },
               {
-                "id": "prod-cervezas",
-                "name": "Cervezas",
-                "description": "Pilsen / Cusqueña trigo / Cusqueña Dorada / Cusqueña Negra.",
+                "id": "prod-te-anis-manzanilla",
+                "name": "Té / Anís / Manzanilla",
+                "description": "Infusiones calientes.",
+                "price": 4,
+                "is_recommended": false,
+                "is_hidden": false,
+                "image_url": "",
+                "cloudinary_id": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "block-7",
+        "categories": [
+          {
+            "id": "cat-bebidas",
+            "name": "Bebidas",
+            "description": "",
+            "block_id": "block-7",
+            "products": [
+              {
+                "id": "prod-limonada",
+                "name": "Limonada",
+                "description": "Refrescante limonada natural.",
                 "price": 8,
+                "is_recommended": true,
+                "is_hidden": false,
+                "image_url": "",
+                "cloudinary_id": ""
+              },
+              {
+                "id": "prod-maracuya",
+                "name": "Maracuyá",
+                "description": "Jugo de maracuyá natural.",
+                "price": 8,
+                "is_recommended": false,
+                "is_hidden": false,
+                "image_url": "",
+                "cloudinary_id": ""
+              },
+              {
+                "id": "prod-chicha",
+                "name": "Chicha",
+                "description": "Tradicional chicha morada.",
+                "price": 8,
+                "is_recommended": true,
+                "is_hidden": false,
+                "image_url": "",
+                "cloudinary_id": ""
+              },
+              {
+                "id": "prod-gaseosa-05lt",
+                "name": "Gaseosa 1/2 lt",
+                "description": "Gaseosa personal.",
+                "price": 5,
+                "is_recommended": false,
+                "is_hidden": false,
+                "image_url": "",
+                "cloudinary_id": ""
+              },
+              {
+                "id": "prod-agua",
+                "name": "Agua / gas",
+                "description": "Agua con o sin gas.",
+                "price": 5,
                 "is_recommended": false,
                 "is_hidden": false,
                 "image_url": "",

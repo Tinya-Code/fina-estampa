@@ -1,0 +1,36 @@
+{
+  "title": "Galería de Eventos",
+  "subtitle": "Momentos inolvidables en cada celebración",
+  "images": [
+    {
+      "src": "/images/eventos/event-1.webp",
+      "alt": "Boda elegante al aire libre",
+      "title": "Boda Elegante"
+    },
+    {
+      "src": "/images/eventos/event-2.webp",
+      "alt": "Celebración corporativa",
+      "title": "Evento Corporativo"
+    },
+    {
+      "src": "/images/eventos/event-3.webp",
+      "alt": "Cena de gala",
+      "title": "Cena de Gala"
+    },
+    {
+      "src": "/images/eventos/event-4.webp",
+      "alt": "Recepción de bodas",
+      "title": "Recepción"
+    },
+    {
+      "src": "/images/eventos/event-5.webp",
+      "alt": "Cocktail de bienvenida",
+      "title": "Cocktail"
+    },
+    {
+      "src": "/images/eventos/event-6.webp",
+      "alt": "Ceremonia al aire libre",
+      "title": "Ceremonia"
+    }
+  ]
+}

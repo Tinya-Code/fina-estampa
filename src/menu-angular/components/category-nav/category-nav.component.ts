@@ -1,11 +1,12 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-
+import { ChangeDetectionStrategy, Component, input } from "@angular/core";
+import { HeaderComponent } from "../../../share/components-angular/header/header.component";
 @Component({
-  selector: 'app-category-nav',
+  selector: "app-category-nav",
   standalone: true,
+  imports: [HeaderComponent],
   template: `
     <div
-      class="sticky top-0 z-40 bg-background/90 backdrop-blur-md border-b border-primary/10 shadow-sm py-4 px-4"
+      class="sticky flex justify-between gap-1  top-0 z-40 bg-background/90 backdrop-blur-md border-b border-primary/10 shadow-sm py-4 px-4"
     >
       <div
         class="max-w-7xl mx-auto flex items-center gap-3 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
@@ -19,6 +20,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
           </a>
         }
       </div>
+      <app-header variant="minimal" />
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -30,10 +32,11 @@ export class CategoryNav {
     const element = document.getElementById(categoryId);
     if (element) {
       const offset = 140;
-      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+      const elementPosition =
+        element.getBoundingClientRect().top + window.scrollY;
       window.scrollTo({
         top: elementPosition - offset,
-        behavior: 'smooth',
+        behavior: "smooth",
       });
     }
   }
