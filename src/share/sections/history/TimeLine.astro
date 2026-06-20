@@ -1,0 +1,101 @@
+---
+const timelineItems = [
+  {
+    year: 2012,
+    title: "Inicio de la empresa",
+    description: "Los inicios de un sueño familiar",
+    image: "/images/restaurant/fina-estampa-antes.png",
+  },
+  {
+    year: 2015,
+    title: "Monasterio de Mama Atta",
+    description: "Un espacio que marco nuestra historia y nuestro camino",
+    image: "/images/restaurant/espacio-aire-libre.png",
+  },
+  {
+    year: 2018,
+    title: "Nacimiento de Fina Estampa",
+    description: "Una nueva etapa, misma esencia",
+    image: "/images/restaurant/fina-estampa-banner.png",
+  },
+  {
+    year: "Actualidad",
+    title: "Solidez y crecimiento",
+    description: "Seguimos creciendo para compartir momentos únicos",
+    image: "/images/food/lomo-anticuchero.jpg",
+  },
+];
+---
+
+<section
+  class="flex min-h-[calc(100dvh-70px)] bg-tertiary/10 py-6 px-0 md:py-12"
+>
+  <div class="flex max-w-6xl mx-auto">
+    <div class="grid gap-0 md:gap-16">
+      <div class="flex flex-col justify-center gap-4 px-4 md:px-0">
+        <div class="flex justify-center">
+          <h2 class="text-4xl md:text-5xl text-primary mb-8 font-serif">
+            Huellas de nuestra historia
+          </h2>
+        </div>
+        <!-- Mobile: vertical timeline -->
+        <div class="flex-1 flex flex-col md:hidden">
+          {
+            timelineItems.map((item, index) => (
+              <div class="flex-1 flex items-center gap-4">
+                <img
+                  src={item.image}
+                  alt={item.description}
+                  class="w-30 h-30 rounded-full object-cover shrink-0"
+                />
+                <div class="relative flex flex-col justify-center items-center h-full">
+                  <div class="w-4 h-4 bg-primary rounded-full shrink-0" />
+                  {index < timelineItems.length - 1 && (
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 w-0.5 h-full bg-primary" />
+                  )}
+                </div>
+                <div class="flex flex-col gap-1 pb-8">
+                  <h3 class="text-xl text-primary font-serif">{item.year}</h3>
+                  <h4 class="text-lg text-primary font-serif">{item.title}</h4>
+                  <p class="text-primary/80">{item.description}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+
+        <!-- Desktop: horizontal timeline -->
+        <div class="hidden md:grid grid-cols-4 relative">
+          {
+            timelineItems.map((item, index) => (
+              <div class="flex flex-col items-center gap-4">
+                <img
+                  src={item.image}
+                  alt={item.description}
+                  class="w-full h-auto aspect-video rounded-lg px-4"
+                />
+                <div class="relative w-full h-4">
+                  {/* line connecting points */}
+                  {index < timelineItems.length - 1 && (
+                    <div class="absolute left-1/2 top-1/2 w-full h-0.5 bg-primary" />
+                  )}
+                  {/* point */}
+                  <div class="absolute left-1/2 -translate-x-1/2 w-4 h-4 bg-primary rounded-full" />
+                </div>
+                <h3 class="text-2xl md:text-3xl text-primary font-serif">
+                  {item.year}
+                </h3>
+                <h4 class="text-lg text-primary font-semibold font-serif text-center">
+                  {item.title}
+                </h4>
+                <p class="text-lg px-4 text-center text-primary">
+                  {item.description}
+                </p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
