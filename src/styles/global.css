@@ -1,15 +1,15 @@
 @import "tailwindcss";
-
+@import "./expose.css";
 @theme {
-  --color-primary: #0F203E;
+  --color-primary: #0f203e;
   --color-secondary: #2c4877;
-  --color-tertiary: #AE8149;
-  --color-background: #EEE5DC;
+  --color-tertiary: #ae8149;
+  --color-background: #eee5dc;
   --color-surface: #f4f4f5;
-  --color-accent: #AE8149;
+  --color-accent: #f9a243;
   --color-highlight: #f9a243;
-  --font-display: 'Bebas Neue', sans-serif;
-  --font-body: 'Poppins', sans-serif;
+  --font-display: "Expose-Bold", sans-serif;
+  --font-body: "Expose-Regular", sans-serif;
 }
 
 html {

@@ -1,0 +1,50 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { EVENTS_CONTENT } from "../data/events/events-content";
+import EventsHero from "../share/components/events/EventsHero.astro";
+import { EventsGalleryComponent } from "../share/components-angular/events-gallery/events-gallery.component";
+import FAQAccordion from "../share/components/events/FAQAccordion.astro";
+import TestimonialsSlider from "../share/components/events/TestimonialsSlider.astro";
+import { HeaderComponent } from "../share/components-angular/header/header.component";
+import Gallery from "../share/components/events/Gallery.astro";
+import GALLERY_DATA from "../data/events/gallery-images.json";
+import Footer from "../share/components/Footer.astro";
+---
+
+<Layout
+  title="Eventos en Cieneguilla - Fina Estampa"
+  description="El mejor lugar para celebrar tus eventos especiales en Cieneguilla"
+  keywords="eventos, cieneguilla, celebraciones, fiestas, bodas, cumpleaños"
+>
+  <HeaderComponent client:visible />
+  <!-- Hero Section -->
+  <EventsHero content={EVENTS_CONTENT.hero} />
+  <Gallery data={GALLERY_DATA} />
+
+  <!-- Events Gallery -->
+  <EventsGalleryComponent
+    client:load
+    title={EVENTS_CONTENT.gallery.title}
+    subtitle={EVENTS_CONTENT.gallery.subtitle}
+    cta={EVENTS_CONTENT.gallery.cta}
+  />
+
+  <!-- FAQ Accordion -->
+  <FAQAccordion
+    title={EVENTS_CONTENT.faq.title}
+    subtitle={EVENTS_CONTENT.faq.subtitle}
+    questions={EVENTS_CONTENT.faq.questions}
+    cta={EVENTS_CONTENT.faq.cta}
+  />
+
+  <!-- Testimonials Slider -->
+  <TestimonialsSlider
+    title={EVENTS_CONTENT.testimonials.title}
+    subtitle={EVENTS_CONTENT.testimonials.subtitle}
+    reviews={EVENTS_CONTENT.testimonials.reviews}
+    cta={EVENTS_CONTENT.testimonials.cta}
+  />
+  <Gallery data={GALLERY_DATA} />
+
+  <Footer />
+</Layout>

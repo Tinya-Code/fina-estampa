@@ -22,7 +22,11 @@
       },
       "order_config": {
         "delivery_fee": 8.0,
-        "payment_methods": ["cash", "yape", "plin"],
+        "payment_methods": [
+          "cash",
+          "yape",
+          "plin"
+        ],
         "delivery_enabled": true,
         "max_order_quantity": 20
       },
@@ -69,9 +73,12 @@
             "isOpen": true
           }
         },
-        "delivery_zones": ["Cieneguilla", "Pachacamac", "Manchay"]
+        "delivery_zones": [
+          "Cieneguilla",
+          "Manchay"
+        ]
       },
-      "description": "✨ Elegancia, sabor y excelencia ✨",
+      "description": "En Fina Estampa celebramos la esencia criolla con un toque de distinción; aquí cada detalle está pensado para que vivas momentos únicos y memorables.",
       "tags": [
         "chifa",
         "comida china",
@@ -91,7 +98,7 @@
         "yape",
         "plin"
       ],
-      "logo_url": "/favicon.png"
+      "logo_url": "/fina-logo.svg"
     }
   }
 }

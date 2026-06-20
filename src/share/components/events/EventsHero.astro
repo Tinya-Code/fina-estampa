@@ -1,0 +1,44 @@
+---
+import Button from "../ui/button/Button.astro";
+
+interface EventsHeroProps {
+  content: {
+    title: string;
+    subtitle: string;
+    ctas: Array<{
+      text: string;
+      link: string;
+      variant: "primary" | "secondary" | "tertiary";
+    }>;
+  };
+}
+
+const { content } = Astro.props;
+---
+
+<section class="relative min-h-[95vh] flex items-center bg-white">
+  <div class="container mx-auto px-6 py-20">
+    <div class="max-w-4xl">
+      <h1
+        class="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-primary leading-tight mb-6"
+      >
+        {content.title}
+      </h1>
+      <p class="font-body text-xl md:text-2xl text-gray-600 mb-10 max-w-2xl">
+        {content.subtitle}
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4">
+        {
+          content.ctas.map((cta) => (
+            <Button
+              text={cta.text}
+              link={cta.link}
+              variant={cta.variant}
+              size="lg"
+            />
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

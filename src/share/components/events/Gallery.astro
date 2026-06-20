@@ -1,0 +1,236 @@
+---
+interface GalleryImage {
+  src: string;
+  alt: string;
+  title: string;
+}
+
+interface GalleryData {
+  title: string;
+  subtitle: string;
+  images: GalleryImage[];
+}
+
+interface GalleryProps {
+  data: GalleryData;
+}
+
+const { data } = Astro.props;
+
+const INITIAL_LIMIT_MOBILE = 11;
+const INITIAL_LIMIT_DESKTOP = 14;
+---
+
+<section class="w-full bg-white gallery-section">
+  <div
+    class="gallery-grid w-full relative grid grid-cols-3 md:grid-cols-6 auto-rows-[140px] md:auto-rows-[180px] grid-flow-row-dense"
+  >
+    {
+      data.images.map((image, index) => {
+        const isFirst = index === 0;
+        const isSecond = index === 1;
+
+        // original span configuration
+        const originalSpan = isFirst
+          ? "col-span-2 row-span-2"
+          : isSecond
+            ? "col-span-2 row-span-1"
+            : "col-span-1 row-span-1";
+
+        // Determine initial visibility classes
+        const isHiddenMobile = index >= INITIAL_LIMIT_MOBILE;
+        const isHiddenDesktop = index >= INITIAL_LIMIT_DESKTOP;
+
+        // Apply eager loading to initially visible images, lazy loading to the rest
+        const loadingAttr = index < INITIAL_LIMIT_DESKTOP ? "eager" : "lazy";
+
+        return (
+          <div
+            class={`gallery-item relative overflow-hidden group opacity-0 animate-fade-in-down cursor-pointer   transition-all duration-500 ease-in-out ${originalSpan} ${isHiddenMobile ? "hidden-mobile" : ""} ${isHiddenDesktop ? "hidden-desktop" : ""}`}
+            style={`animation-delay: ${index * 80}ms; animation-fill-mode: forwards;`}
+            data-index={index}
+            data-original-span={originalSpan}
+          >
+            <img
+              src={image.src}
+              alt={image.alt}
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              loading={loadingAttr}
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+              <span class="text-white select-none font-display font-bold text-lg leading-tight">
+                {image.title}
+              </span>
+            </div>
+          </div>
+        );
+      })
+    }
+    <div
+      class="load-more-container bottom-0 flex absolute w-full items-center justify-center py-2 z-10"
+    >
+      <button
+        class="load-more-btn px-8 py-3 bg-accent text-white font-body rounded-full hover:bg-primary/90 transition-colors shadow-sm hover:shadow-md"
+      >
+        Ver más imágenes
+      </button>
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ INITIAL_LIMIT_MOBILE, INITIAL_LIMIT_DESKTOP }}>
+  const INITIAL_LIMIT_MOBILE_VAL = INITIAL_LIMIT_MOBILE;
+  const INITIAL_LIMIT_DESKTOP_VAL = INITIAL_LIMIT_DESKTOP;
+
+  function initGallery() {
+    const sections = document.querySelectorAll(".gallery-section");
+
+    sections.forEach((section) => {
+      if (section.dataset.initialized) return;
+      section.dataset.initialized = "true";
+
+      const grid = section.querySelector(".gallery-grid");
+      const loadMoreContainer = section.querySelector(".load-more-container");
+      const loadMoreBtn = section.querySelector(".load-more-btn");
+
+      if (!grid || !loadMoreBtn || !loadMoreContainer) return;
+
+      const totalItems = grid.querySelectorAll(".gallery-item").length;
+      let shownCount =
+        window.innerWidth >= 768
+          ? INITIAL_LIMIT_DESKTOP_VAL
+          : INITIAL_LIMIT_MOBILE_VAL;
+
+      function updateButtonText() {
+        const remaining = totalItems - shownCount;
+        if (remaining <= 0) {
+          loadMoreContainer.classList.add("hidden");
+        } else {
+          loadMoreContainer.classList.remove("hidden");
+          loadMoreBtn.textContent = `Ver más imágenes (${remaining} restantes)`;
+        }
+      }
+
+      function loadMoreImages() {
+        const isDesktop = window.innerWidth >= 768;
+        const batchSize = isDesktop ? 6 : 4;
+        const hiddenClass = isDesktop ? "hidden-desktop" : "hidden-mobile";
+
+        const hiddenItems = Array.from(
+          grid.querySelectorAll(`.gallery-item.${hiddenClass}`),
+        );
+        const itemsToReveal = hiddenItems.slice(0, batchSize);
+
+        itemsToReveal.forEach((item) => {
+          item.classList.remove(hiddenClass);
+          item.classList.remove("hidden-desktop");
+          item.classList.remove("hidden-mobile");
+        });
+
+        shownCount += itemsToReveal.length;
+        updateButtonText();
+      }
+
+      function collapseAll() {
+        grid.querySelectorAll(".gallery-item.expanded").forEach((el) => {
+          el.classList.remove("expanded");
+
+          // Reset classes back to original span
+          el.classList.remove(
+            "col-span-3",
+            "row-span-2",
+            "md:col-span-3",
+            "md:row-span-2",
+          );
+
+          const originalSpan = el.dataset.originalSpan;
+          if (originalSpan) {
+            originalSpan.split(" ").forEach((cls) => el.classList.add(cls));
+          }
+        });
+      }
+
+      // Initialize button text
+      updateButtonText();
+
+      // Inline Grid Expansion
+      grid.addEventListener("click", (e) => {
+        const item = e.target.closest(".gallery-item");
+        if (!item) return;
+
+        const isExpanded = item.classList.contains("expanded");
+
+        // Collapse any currently expanded item
+        collapseAll();
+
+        if (!isExpanded) {
+          // Mark as expanded
+          item.classList.add("expanded");
+
+          // Remove original span classes
+          const originalSpan = item.dataset.originalSpan;
+          if (originalSpan) {
+            originalSpan
+              .split(" ")
+              .forEach((cls) => item.classList.remove(cls));
+          }
+
+          // Add expanded span classes
+          // On mobile: col-span-3 row-span-2 (takes up the 3 columns)
+          // On desktop: md:col-span-4 md:row-span-3 (takes up 4 columns of the 6 column grid)
+          item.classList.add(
+            "col-span-3",
+            "row-span-2",
+            "md:col-span-3",
+            "md:row-span-2",
+          );
+
+          // Smooth scroll to element
+          setTimeout(() => {
+            item.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          }, 100);
+        }
+      });
+
+      // Load more click
+      loadMoreBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        loadMoreImages();
+      });
+    });
+  }
+
+  document.addEventListener("astro:page-load", initGallery);
+  initGallery();
+</script>
+
+<style>
+  @keyframes fade-in-down {
+    from {
+      opacity: 0;
+      transform: translateY(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-down {
+    animation: fade-in-down 0.6s ease-out;
+  }
+
+  /* Responsive hidden classes */
+  @media (max-width: 767px) {
+    .gallery-item.hidden-mobile {
+      display: none !important;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .gallery-item.hidden-desktop {
+      display: none !important;
+    }
+  }
+</style>

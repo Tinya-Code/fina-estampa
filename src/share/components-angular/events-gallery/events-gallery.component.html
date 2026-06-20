@@ -1,0 +1,58 @@
+<section class="py-10 bg-surface events-gallery-section">
+  <div class="container mx-auto px-4">
+    <!-- Section Header -->
+
+    <div class="flex flex-col justify-center pb-4 items-center gap-2">
+
+      <span class="text-xs md:text-sm font-display tracking-[0.2em] text-accent ">
+        {{subtitle().toUpperCase()}}
+      </span>
+
+
+      <h2
+        class="text-3xl flex flex-col items-center justify-center w-auto md:text-4xl font-display text-neutral-800 leading-tight tracking-tight relative pb-4">
+        {{title()}}
+        <span class="absolute bottom-0 h-1 w-16 bg-accent rounded-full  "></span>
+      </h2>
+    </div>
+
+    <!-- Gallery (Vertical on Mobile, Horizontal on Desktop) -->
+    <div class="relative overflow-hidden mb-8" style="height: 600px" [style.height]="isMobile() ? '600px' : '400px'"
+      #container (mouseenter)="stopAutoScroll()" (mouseleave)="startAutoScroll()">
+      <div class="flex gap-0" [class.flex-col]="isMobile()" [class.items-center]="isMobile()"
+        [class.justify-center]="isMobile()" [class.flex-row]="!isMobile()" [class.md:items-center]="!isMobile()"
+        [style.transition]="'transform 500ms ease-out'" [style.transform]="
+          isMobile()
+            ? 'translateY(' + translateX() + 'px)'
+            : 'translateX(' + translateX() + 'px)'
+        ">
+        @for (image of images; track image.src; let i = $index) {
+        @if (!hasImageFailed($index)) {
+        <div class="flex-shrink-0 cursor-pointer relative overflow-hidden transition-all ease-out duration-500"
+          [style.transition]="'all 500ms ease-out'" [class.z-10]="selectedIndex() === $index"
+          [class.z-1]="selectedIndex() !== $index" [ngClass]="
+                isMobile()
+                  ? selectedIndex() === $index
+                    ? 'w-full h-80'
+                    : 'w-10/12 h-20'
+                  : selectedIndex() === $index
+                    ? 'w-80 h-96'
+                    : 'w-20 h-80'
+              " (click)="expandImage($index)">
+          <img [src]="image.src" [alt]="image.alt" [title]="image.title" loading="lazy" (error)="onImageError($index)"
+            class="w-full h-full object-cover bg-gray-200" style="min-height: 100%" />
+          @if (selectedIndex() === $index) {
+          <div
+            class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-4 text-white">
+            <p class="font-display select-none font-bold text-lg md:text-xl text-center">
+              {{ image.title }}
+            </p>
+          </div>
+          }
+        </div>
+        }
+        }
+      </div>
+    </div>
+  </div>
+</section>

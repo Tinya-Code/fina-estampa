@@ -1,0 +1,303 @@
+---
+import { Icon } from "astro-icon/components";
+import restaurantData from "../../data/restaurant.json";
+
+const { restaurant, settings } = restaurantData.data;
+const socialMedia = settings.business_config.social_media;
+const businessHours = settings.business_config.business_hours;
+
+// Textos del footer
+const FOOTER_TEXTS = {
+  quickLinks: {
+    title: "Enlaces Rápidos",
+    links: [
+      { label: "Inicio", href: "/" },
+      { label: "Nuestros Menús", href: "/menu-desayunos-cocteles" },
+      { label: "Nuestra Historia", href: "/historia-fina-estampa" },
+      { label: "Celebración de Eventos", href: "/eventos-cieneguilla" },
+      { label: "Reservas & Contacto", href: "/contacto-fina-estampa" },
+    ],
+  },
+  businessHours: {
+    title: "Horario de Atención",
+  },
+  newsletter: {
+    title: "Boletín Informativo",
+    description:
+      "Inscríbete para recibir nuestras promociones de fin de semana, eventos especiales y novedades.",
+    placeholder: "Tu correo electrónico",
+    button: "Suscribirse",
+    successMessage: "¡Gracias por suscribirte!",
+  },
+  delivery: {
+    title: "Reparto a Domicilio",
+  },
+  paymentMethods: {
+    title: "Medios de Pago Aceptados",
+    cash: "Efectivo",
+    digital: "Yape / Plin",
+  },
+  developer: {
+    label: "Desarrollado por",
+    name: "Tinya Code",
+    contact:
+      "https://wa.me/51924932128?text=Hola%20Tinya%20Code,%20me%20gustaría%20saber%20más%20sobre%20sus%20servicios",
+  },
+  copyright: {
+    suffix: ". Todos los derechos reservados.",
+  },
+  socialMedia: {
+    ariaLabels: {
+      facebook: "Facebook",
+      instagram: "Instagram",
+      tiktok: "TikTok",
+    },
+  },
+  dayLabels: {
+    monday: "Lunes",
+    tuesday: "Martes",
+    wednesday: "Miércoles",
+    thursday: "Jueves",
+    friday: "Viernes",
+    saturday: "Sábado",
+    sunday: "Domingo",
+  },
+};
+
+const getDayLabel = (day: string) => {
+  return (
+    FOOTER_TEXTS.dayLabels[day as keyof typeof FOOTER_TEXTS.dayLabels] || day
+  );
+};
+---
+
+<footer
+  class="bg-primary text-background font-body pt-16 pb-8 border-t border-secondary"
+>
+  <div
+    class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10"
+  >
+    <!-- Columna 1: Logo, Descripción y Redes Sociales -->
+    <div
+      class="flex flex-col gap-4 text-center md:text-left items-center md:items-start"
+    >
+      <img
+        src="/fina-logo.svg"
+        alt={restaurant.name}
+        class="h-30 w-auto mx-auto object-contain transition-transform hover:scale-105 duration-300"
+      />
+
+      <p class="text-sm opacity-80 leading-relaxed max-w-sm">
+        {settings.description}
+      </p>
+
+      <!-- Redes Sociales con Hover Color Accent -->
+      <div class="flex items-center gap-3 mt-2">
+        {
+          socialMedia.facebook && (
+            <a
+              href={socialMedia.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-9 h-9 rounded-full bg-secondary/40 flex items-center justify-center text-background hover:text-accent hover:bg-secondary/70 transition-all duration-300"
+              aria-label={FOOTER_TEXTS.socialMedia.ariaLabels.facebook}
+            >
+              <Icon name="lucide:facebook" class="w-5 h-5" />
+            </a>
+          )
+        }
+        {
+          socialMedia.instagram && (
+            <a
+              href={socialMedia.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-9 h-9 rounded-full bg-secondary/40 flex items-center justify-center text-background hover:text-accent hover:bg-secondary/70 transition-all duration-300"
+              aria-label={FOOTER_TEXTS.socialMedia.ariaLabels.instagram}
+            >
+              <Icon name="lucide:instagram" class="w-5 h-5" />
+            </a>
+          )
+        }
+        {
+          socialMedia.tiktok && (
+            <a
+              href={socialMedia.tiktok}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-9 h-9 rounded-full bg-secondary/40 flex items-center justify-center text-background hover:text-accent hover:bg-secondary/70 transition-all duration-300"
+              aria-label={FOOTER_TEXTS.socialMedia.ariaLabels.tiktok}
+            >
+              <Icon name="lucide:video" class="w-5 h-5" />
+            </a>
+          )
+        }
+      </div>
+    </div>
+
+    <!-- Columna 2: Enlaces Rápidos (Sitemap) -->
+    <div
+      class="flex flex-col gap-4 text-center md:text-left items-center md:items-start"
+    >
+      <h3 class="font-display text-lg uppercase tracking-wider text-accent">
+        {FOOTER_TEXTS.quickLinks.title}
+      </h3>
+      <ul class="flex flex-col gap-2.5 text-sm opacity-90 w-full">
+        {
+          FOOTER_TEXTS.quickLinks.links.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="hover:text-accent transition-colors duration-200 block py-0.5"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <!-- Columna 3: Horarios de Atención -->
+    <div class="flex flex-col gap-4">
+      <h3
+        class="font-display text-lg uppercase tracking-wider text-accent text-center md:text-left"
+      >
+        {FOOTER_TEXTS.businessHours.title}
+      </h3>
+      <ul
+        class="flex flex-col gap-2 text-sm opacity-90 max-w-xs mx-auto md:mx-0 w-full"
+      >
+        {
+          Object.entries(businessHours).map(([day, config]) => {
+            if (!config.isOpen) return null;
+            return (
+              <li class="flex justify-between border-b border-secondary/30 pb-1.5">
+                <span class="font-medium">{getDayLabel(day)}</span>
+                <span class="opacity-95">
+                  {config.open} - {config.close}
+                </span>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </div>
+
+    <!-- Columna 4: Boletín Informativo (Newsletter) -->
+    <div
+      class="flex flex-col gap-4 text-center md:text-left items-center md:items-start"
+    >
+      <h3 class="font-display text-lg uppercase tracking-wider text-accent">
+        {FOOTER_TEXTS.newsletter.title}
+      </h3>
+      <p class="text-sm opacity-80 leading-relaxed max-w-sm">
+        {FOOTER_TEXTS.newsletter.description}
+      </p>
+      <form
+        class="flex flex-col gap-2.5 w-full max-w-xs"
+        onsubmit={`event.preventDefault(); alert('${FOOTER_TEXTS.newsletter.successMessage}'); this.reset();`}
+      >
+        <input
+          type="email"
+          required
+          placeholder={FOOTER_TEXTS.newsletter.placeholder}
+          class="px-4 py-2.5 rounded-lg bg-secondary/35 text-background border border-secondary/40 focus:border-accent focus:outline-hidden text-sm w-full transition-colors"
+        />
+        <button
+          type="submit"
+          class="px-4 py-2.5 bg-accent text-primary font-display font-bold rounded-lg hover:bg-highlight transition-all duration-300 text-sm w-full cursor-pointer shadow-sm"
+        >
+          {FOOTER_TEXTS.newsletter.button}
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Fila Intermedia: Contacto, Reparto y Métodos de Pago -->
+  <div
+    class="container mx-auto px-4 mt-4 pt-4 border-t border-secondary/30 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left"
+  >
+    <!-- Contacto Directo -->
+    <div class="flex flex-col gap-2.5 items-center md:items-start text-sm">
+      <div class="flex items-start gap-3">
+        <Icon
+          name="lucide:map-pin"
+          class="w-5 h-5 text-accent flex-shrink-0 mt-0.5"
+        />
+        <span class="opacity-90">{restaurant.address}</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <Icon name="lucide:phone" class="w-5 h-5 text-accent flex-shrink-0" />
+        <a
+          href={`tel:+51${restaurant.phone}`}
+          class="hover:text-accent font-semibold transition-colors duration-200"
+        >
+          +51 {restaurant.phone}
+        </a>
+      </div>
+    </div>
+
+    <!-- Zonas de Reparto (Delivery) -->
+    <div class="flex flex-col gap-2 items-center md:items-start">
+      <span class="text-xs uppercase tracking-wider text-accent font-semibold"
+        >{FOOTER_TEXTS.delivery.title}</span
+      >
+      <div class="flex flex-wrap gap-1.5 justify-center md:justify-start">
+        {
+          settings.business_config.delivery_zones.map((zone) => (
+            <span class="text-xs bg-secondary/50 px-3 py-1 rounded-full font-medium text-background">
+              {zone}
+            </span>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Métodos de Pago -->
+    <div class="flex flex-col gap-2 items-center md:items-start">
+      <span class="text-xs uppercase tracking-wider text-accent font-semibold"
+        >{FOOTER_TEXTS.paymentMethods.title}</span
+      >
+      <div class="flex items-center gap-3 mt-1">
+        <div
+          class="flex items-center gap-1.5 bg-secondary/30 px-2.5 py-1.5 rounded-md text-xs font-semibold"
+        >
+          <Icon name="lucide:banknote" class="w-4 h-4 text-accent" />
+          <span>{FOOTER_TEXTS.paymentMethods.cash}</span>
+        </div>
+        <div
+          class="flex items-center gap-1.5 bg-secondary/30 px-2.5 py-1.5 rounded-md text-xs font-semibold"
+        >
+          <Icon name="lucide:smartphone" class="w-4 h-4 text-accent" />
+          <span>{FOOTER_TEXTS.paymentMethods.digital}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fila Inferior: Copyright & Atribución a Desarrollador -->
+  <div
+    class="container mx-auto px-4 mt-4 pt-4 border-t border-secondary/30 flex flex-col md:flex-row items-center justify-between gap-4 text-xs opacity-75"
+  >
+    <p class="text-center md:text-left">
+      &copy; {new Date().getFullYear()}
+      {restaurant.name}{FOOTER_TEXTS.copyright.suffix}
+    </p>
+    <p class="flex items-center gap-1.5 justify-center md:justify-end text-sm">
+      <span>{FOOTER_TEXTS.developer.label}</span>
+      <a
+        href={FOOTER_TEXTS.developer.contact}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-accent hover:text-highlight transition-colors duration-200 font-bold flex items-center gap-1 group"
+      >
+        <span>{FOOTER_TEXTS.developer.name}</span>
+        <Icon
+          name="lucide:message-circle"
+          class="w-4 h-4 text-accent group-hover:scale-110 transition-transform duration-200"
+        />
+      </a>
+    </p>
+  </div>
+</footer>
