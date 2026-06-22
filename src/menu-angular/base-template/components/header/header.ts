@@ -23,86 +23,79 @@ import { RestaurantService } from "../../../core/services/restaurant.service";
   imports: [LucideAngularModule, ShareButtonComponent],
   template: `
     <header
-      class="relative font-body bg-secondary border-b-8 border-primary px-6 pt-12 pb-16 mb-12 rounded-b-[100px] overflow-hidden"
+      class="relative font-display w-full justify-around flex flex-col max-h-100 h-60 md:h-100  bg-surface overflow-hidden"
     >
-      <div
-        class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-10 relative z-10"
+      <!-- Clip Path -->
+      <svg
+        width="0"
+        height="0"
+        viewBox="0 0 100 100"
+        preserveAspectRatio="none"
+        class="absolute "
       >
-        <!-- Logo Section -->
-        <a href="/" class="relative group cursor-pointer">
-          <div
-            class="absolute inset-0 bg-primary blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-500"
-          ></div>
-
-          @if (_restaurantService.settings()?.logo_url) {
-            <img
-              [src]="_restaurantService.settings()!.logo_url"
-              class="w-16 h-16 text-white"
+        <defs>
+          <clipPath id="left-block-curve" clipPathUnits="objectBoundingBox">
+            <path
+              d="M0,0 V1 H0.915 c0,0 0.19,-0.242 0,-0.5 -0.205,-0.303 0,-0.5 0,-0.5 z"
             />
-          } @else {
-            <div
-              class="w-32 h-32 bg-gradient-to-br from-primary to-primary/80 rounded-3xl flex items-center justify-center shadow-[0_20px_50px_rgba(220,38,38,0.3)] transform -rotate-6 group-hover:rotate-0 transition-all duration-700 ease-out"
+          </clipPath>
+        </defs>
+      </svg>
+
+      <!-- Fondo Desktop -->
+      <div
+        class="absolute items-center  justify-end right-0 top-0 w-[60%] h-full z-0 "
+      >
+        <img
+          src="/images/portada-menu-1.png"
+          alt="Fina Estampa"
+          class="absolute  w-full h-full object-center object-cover"
+        />
+      </div>
+
+      <!-- Sección de Información -->
+      <div
+        class="w-3/5 h-full z-10 relative flex flex-col items-end-safe justify-center md:justify-evenly  px-4 md:px-12 lg:px-16 bg-surface"
+        style="clip-path: url(#left-block-curve)"
+      >
+        <div
+          class="flex flex-col max-w-2xl mx-auto  justify-center items-center gap-4 "
+        >
+          <div class="flex flex-col pr-6 items-center">
+            <img
+              src="/images/fina-letra-logo.svg"
+              alt="Fina Estampa"
+              class="w-full h-auto   object-contain"
+            />
+            <p
+              class="text-primary text-lg md:text-xl leading-relaxed tracking-widest"
             >
-              <lucide-icon
-                [img]="Utensils"
-                class="w-16 h-16 text-white"
-              ></lucide-icon>
-            </div>
-          }
-        </a>
-
-        <!-- Info Section -->
-        <div class="text-center md:text-left flex-1 space-y-4">
-          <h1
-            class="text-6xl md:text-8xl font-display text-white leading-none tracking-tighter"
-          >
-            {{ restaurantName() }}<span class="text-primary">.</span>
-          </h1>
-
-          <div
-            class="flex flex-wrap items-center justify-center md:justify-start gap-4"
-          >
-            <div
-              class="flex items-center gap-2 text-primary-text/80 bg-primary/10 px-4 py-2 rounded-xl border border-primary/20"
-            >
-              <lucide-icon
-                [img]="MapPin"
-                class="w-4 h-4 text-primary"
-              ></lucide-icon>
-              <span class="text-xs font-bold uppercase tracking-wider mr-2">{{
-                address()
-              }}</span>
-
-              <div
-                class="flex items-center gap-3 border-l border-primary/20 pl-4 py-1"
-              >
-                <button
-                  (click)="copyAddress()"
-                  title="Copiar dirección"
-                  class="hover:text-primary transition-colors hover:scale-110"
-                >
-                  <lucide-icon [img]="Copy" class="w-4 h-4"></lucide-icon>
-                </button>
-                <button
-                  (click)="openMaps()"
-                  title="Ver en Google Maps"
-                  class="hover:text-primary transition-colors hover:scale-110"
-                >
-                  <lucide-icon [img]="Map" class="w-4 h-4"></lucide-icon>
-                </button>
-              </div>
-            </div>
+              COCINA CRIOLLA
+            </p>
           </div>
+
+          <h1
+            class=" text-left hidden  text-5xl md:text-7xl font-display text-primary leading-none mb-4"
+          >
+            {{ restaurantName() }}<br />
+          </h1>
         </div>
 
-        <!-- Action Section -->
-        <div class="flex flex-row md:flex-col items-start gap-4">
-          <!-- Menu Button -->
-
-          <!-- Share Button -->
-          <div class="flex flex-col items-center gap-2">
-            <app-share-button />
+        <div class="flex flex-col justify-center mx-auto max-w-md  w-full">
+          <div
+            class="flex w-full hidden md:flex items-center justify-start text-primary/80 md:text-xl md:mb-6 gap-2"
+          >
+            <lucide-icon [img]="MapPin" class="w-5 h-5"></lucide-icon>
+            <span>{{ address() }}</span>
+            <button
+              (click)="openMaps()"
+              title="Ver en Google Maps"
+              class="hover:text-accent/70 hover:scale-110 transition-all"
+            >
+              <lucide-icon [img]="Map" class="w-5 h-5"></lucide-icon>
+            </button>
           </div>
+          <app-share-button class="hidden md:flex"></app-share-button>
         </div>
       </div>
     </header>

@@ -96,7 +96,7 @@ export class Menu implements OnInit {
       // Give it a tiny extra delay for the animations to feel smooth
       setTimeout(() => {
         this.isLoading.set(false);
-      }, 800);
+      }, 300);
     });
   }
 

@@ -20,7 +20,7 @@ import { TemplateSectionTitleComponent } from '../components/template-section-ti
                 [description]="cat.description || ''"
               ></app-template-section-title>
 
-              <div class="grid grid-cols-3 md:grid-cols-4 gap-6">
+              <div class="grid grid-cols-2 md:grid-cols-2 gap-6">
                 @for (product of cat.products; track product.id) {
                   <app-template-card
                     [product]="product"

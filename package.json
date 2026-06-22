@@ -25,7 +25,6 @@
     "@angular/router": "^22.0.2",
     "@astrojs/sitemap": "^3.7.3",
     "@iconify-json/lucide": "^1.2.113",
-    "@lucide/angular": "^1.21.0",
     "lucide-angular": "^1.0.0",
     "@tailwindcss/vite": "^4.3.1",
     "astro": "^6.4.8",

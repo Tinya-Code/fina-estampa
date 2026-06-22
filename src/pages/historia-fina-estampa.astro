@@ -1,10 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Header from "../share/components/Header.astro";
+import { HeaderComponent } from "../share/components-angular/header/header.component";
 import BottomBanner from "../share/sections/history/BottomBanner.astro";
 import Places from "../share/sections/history/Places.astro";
 import TimeLine from "../share/sections/history/TimeLine.astro";
 import TopBanner from "../share/sections/history/TopBanner.astro";
+import Footer from "../share/components/Footer.astro";
 ---
 
 <Layout
@@ -12,9 +13,10 @@ import TopBanner from "../share/sections/history/TopBanner.astro";
   description="Conoce la historia de Fina Estampa..."
   keywords="restaurante, criollo, cieneguilla"
 >
-  <Header />
+  <HeaderComponent client:only />
   <TopBanner />
   <TimeLine />
   <Places />
   <BottomBanner />
+  <Footer />
 </Layout>

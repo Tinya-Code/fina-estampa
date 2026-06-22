@@ -1,11 +1,12 @@
 ---
 import { Icon } from "astro-icon/components";
+import SectionTitle from "../../components/SectionTitle.astro";
 
 const places = [
-  { icon: "lucide:map-pin", text: "Terreno de más de 2,000 m2" },
+  { icon: "lucide:map-pin", text: "Terreno de más de 2,000 m²" },
   { icon: "lucide:layers", text: "2 niveles de ambientes" },
   { icon: "lucide:tree-pine", text: "Amplias áreas verdes" },
-  { icon: "lucide:sun", text: "Salones y terrazas" },
+  { icon: "lucide:sun", text: "Salones y terrazas al aire libre" },
 ];
 
 const images = [
@@ -16,50 +17,56 @@ const images = [
 ];
 ---
 
-<section
-  class="flex min-h-[calc(100dvh-70px)] bg-tertiary/10 py-6 px-0 md:py-12"
->
-  <div class="flex max-w-6xl mx-auto">
-    <div class="grid col-span-1 md:grid-cols-12 gap-4 md:gap-16 items-center">
-      <div class="md:col-span-5 flex flex-col gap-4 px-4 md:px-0">
-        <h2
-          class="text-4xl md:text-5xl text-primary mb-8 font-serif tracking-wider"
-        >
-          Nuestro lugar
-        </h2>
+<section class="bg-tertiary/10 py-8  px-4">
+  <div
+    class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center"
+  >
+    <!-- Text Content -->
+    <div class="flex flex-col gap-6">
+      <SectionTitle title="Nuestro lugar" subtitle="El espacio" align="left" />
 
-        <p class="text-xl leading-relaxed text-primary">
-          Ubicados en <strong><i>Inca Roca 8, Cieneguilla - Lima</i></strong> un entorno
-          natural privilegiado, nuestro local ha sido diseñado para brindar comodidad,
-          calidez y momentos inolvidables.
-        </p>
-        <ul class="text-xl leading-relaxed text-primary mb-6 space-y-3">
-          {
-            places.map((place) => (
-              <li class="flex items-center gap-3">
-                <Icon name={place.icon} class="w-5 h-5 shrink-0 text-primary" />
-                {place.text}
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-      <div class="md:col-span-7 h-full grid grid-cols-2 gap-2">
+      <p class="font-body text-primary/80 text-base md:text-lg leading-relaxed">
+        Ubicados en <strong class="text-primary font-semibold"
+          >Inca Roca 8, Cieneguilla - Lima</strong
+        >, en un entorno natural privilegiado. Nuestro local está diseñado para
+        brindar comodidad, calidez y momentos inolvidables.
+      </p>
+
+      <ul class="flex hidden flex-col gap-3">
         {
-          images.map((image) => (
-            <div class="group aspect-square relative">
-              <img
-                src={image.src}
-                alt={image.alt}
-                class="w-full h-full object-cover"
-              />
-              <span class="md:group-hover:opacity-100 md:opacity-0 absolute inset-0 p-2 bg-black/20 flex items-end italic text-white text-lg font-semibold transition-opacity duration-300">
+          places.map((place) => (
+            <li class="flex items-center gap-3 group">
+              <span class="w-9 h-9 rounded-lg bg-accent/15 flex items-center justify-center flex-shrink-0 group-hover:bg-accent/25 transition-colors duration-200">
+                <Icon name={place.icon} class="w-5 h-5 text-accent" />
+              </span>
+              <span class="font-body text-primary text-sm md:text-base">
+                {place.text}
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <!-- Image Grid -->
+    <div class="grid grid-cols-2 gap-2 rounded-xl overflow-hidden shadow-md">
+      {
+        images.map((image) => (
+          <div class="relative group aspect-square overflow-hidden">
+            <img
+              src={image.src}
+              alt={image.alt}
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-primary/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3">
+              <span class="text-background text-sm font-display font-bold leading-tight">
                 {image.alt}
               </span>
             </div>
-          ))
-        }
-      </div>
+          </div>
+        ))
+      }
     </div>
   </div>
 </section>

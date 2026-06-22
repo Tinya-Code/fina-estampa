@@ -10,7 +10,6 @@
   --color-highlight: #f9a243;
   --font-display: "Expose-Bold", sans-serif;
   --font-body: "Expose-Regular", sans-serif;
-
 }
 
 html {
@@ -21,14 +20,4 @@ img {
   -webkit-user-select: none;
   user-select: none;
   pointer-events: none;
-}
-
-h2::after {
-  content: "";
-  display: block;
-  width: 60px;
-  height: 4px;
-  background-color: var(--color-tertiary);
-  margin-top: 0.2rem;
-  border-radius: 1rem;
 }
