@@ -1,74 +1,109 @@
 ---
+import { Icon } from "astro-icon/components";
+import SectionTitle from "../../components/SectionTitle.astro";
 
+const contactData = {
+  title: "Contáctanos",
+  phone: "+51 942 235 532",
+  email: "info@finaestampa.com",
+  address: "Inca Roca 6, Cieneguilla 15593, Perú",
+  schedule: [
+    { day: "Lunes a Jueves", hours: "11:00 a.m. - 6:00 p.m." },
+    { day: "Viernes", hours: "11:00 a.m. - 1:00 p.m." },
+    { day: "Sábado", hours: "7:00 a.m. - 1:00 p.m." },
+    { day: "Domingo", hours: "7:00 a.m. - 6:00 p.m." },
+  ],
+  button: {
+    text: "Reservar",
+    link: "/contacto-fina-estampa",
+  },
+  mapSrc:
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.004326509257!2d-76.81986272509062!3d-12.11185604311579!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105eb0044eaf97f%3A0xd5726a4c8ad1e4c6!2sFina%20Estampa%20Cieneguilla!5e0!3m2!1ses-419!2smx!4v1781749636078!5m2!1ses-419!2smx",
+};
+
+const contactItems = [
+  {
+    icon: "lucide:phone",
+    label: "Teléfono",
+    value: contactData.phone,
+    href: `tel:${contactData.phone.replace(/\s/g, "")}`,
+  },
+  {
+    icon: "lucide:mail",
+    label: "Email",
+    value: contactData.email,
+    href: `mailto:${contactData.email}`,
+  },
+  {
+    icon: "lucide:map-pin",
+    label: "Dirección",
+    value: contactData.address,
+  },
+];
 ---
 
-<section class="flex min-h-[calc(100dvh-70px)] py-6 px-0 md:py-12">
-  <div class="flex flex-1 max-w-6xl mx-auto">
-    <div class="w-full grid md:grid-cols-2 gap-16 items-center">
-      <div class="flex flex-col gap-4 px-4 md:px-0">
-        <h2
-          class="text-4xl md:text-5xl text-primary mb-8 font-serif tracking-wider"
-        >
-          Contáctanos
-        </h2>
+<section class="bg-surface py-10 md:py-16">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="grid md:grid-cols-2 gap-10 lg:gap-16 items-stretch">
+      
+      <!-- INFO -->
+      <div class="flex flex-col justify-center gap-8">
+        <header>
+          <SectionTitle title={contactData.title} align="left" />
 
-        <div>
-          <p class="text-lg font-semibold leading-relaxed text-primary">
-            Teléfono
+          <p class="font-body text-primary/70 mt-3 leading-relaxed">
+            Estamos listos para atenderte. Reserva tu visita o contáctanos por
+            cualquiera de nuestros canales.
           </p>
-          <p class="text-xl leading-relaxed text-primary">+51 942 235 532</p>
-        </div>
-        <div>
-          <p class="text-lg font-semibold leading-relaxed text-primary">
-            Email
-          </p>
-          <p class="text-xl leading-relaxed text-primary">
-            info@finaestampa.com
-          </p>
-        </div>
-        <div>
-          <p class="text-lg font-semibold leading-relaxed text-primary">
-            Dirección
-          </p>
-          <p class="text-xl leading-relaxed text-primary">
-            Inca Roca 6, Cieneguilla 15593, Perú
-          </p>
-        </div>
-        <div class="max-w-sm">
-          <p class="text-lg font-semibold leading-relaxed text-primary">
-            Horarios
-          </p>
-          <p class="flex justify-between text-xl leading-relaxed text-primary">
-            <span>Lunes a Jueves:</span> 11:00 a.m. - 6:00 p.m.
-          </p>
-          <p class="flex justify-between text-xl leading-relaxed text-primary">
-            <span>Viernes:</span> 11:00 a.m. - 1:00 p.m.
-          </p>
-          <p class="flex justify-between text-xl leading-relaxed text-primary">
-            <span>Sábado:</span> 7:00 a.m. - 1:00 p.m.
-          </p>
-          <p class="flex justify-between text-xl leading-relaxed text-primary">
-            <span>Domingo:</span> 7:00 a.m. - 6:00 p.m.
-          </p>
-        </div>
-        <div class="flex justify-center mt-4">
-          <a
-            href="/contacto-fina-estampa"
-            class="flex-1 md:flex-none text-center text-lg md:text-base text-primary px-6 py-2 border-2 border-tertiary rounded-full font-semibold hover:bg-tertiary/20 transition-colors"
-          >
-            Reservar
-          </a>
-        </div>
+        </header>
+
+        <address class="not-italic space-y-6">
+          {
+            contactItems.map((item) => (
+              <div class="flex gap-4 items-start">
+                <div
+                  class="shrink-0 rounded-full bg-accent/10 p-3 text-accent"
+                >
+                  <Icon name={item.icon} class="size-5" />
+                </div>
+
+                <div>
+                  <p class="font-display text-lg text-primary">
+                    {item.label}
+                  </p>
+
+                  {item.href ? (
+                    <a
+                      href={item.href}
+                      class="font-body text-primary/75 hover:text-accent transition-colors"
+                    >
+                      {item.value}
+                    </a>
+                  ) : (
+                    <p class="font-body text-primary/75 leading-relaxed">
+                      {item.value}
+                    </p>
+                  )}
+                </div>
+              </div>
+            ))
+          }
+        </address>
+  
       </div>
-      <div class="w-full h-128 md:h-full">
+
+      <!-- MAP -->
+      <div class="overflow-hidden rounded-3xl min-h-60 shadow-xl ">
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.004326509257!2d-76.81986272509062!3d-12.11185604311579!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105eb0044eaf97f%3A0xd5726a4c8ad1e4c6!2sFina%20Estampa%20Cieneguilla!5e0!3m2!1ses-419!2smx!4v1781749636078!5m2!1ses-419!2smx"
+          src={contactData.mapSrc}
           width="100%"
           height="100%"
           style="border:0;"
-          allowfullscreen=""
+          allowfullscreen
           loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"></iframe>
+          title="Mapa de ubicación de Fina Estampa"
+          referrerpolicy="no-referrer-when-downgrade"
+        />
       </div>
     </div>
   </div>

@@ -4,9 +4,16 @@ interface Props {
   subtitle?: string;
   align?: "left" | "center" | "right";
   className?: string;
+  classTitle?: string;
 }
 
-const { title, subtitle, align = "center", className = "" } = Astro.props;
+const {
+  title,
+  subtitle,
+  align = "center",
+  className = "",
+  classTitle = "text-3xl md:text-4xl",
+} = Astro.props;
 
 const alignmentClasses = {
   left: "text-left items-start",
@@ -25,7 +32,7 @@ const alignmentClasses = {
   }
 
   <h2
-    class="text-3xl w-auto md:text-4xl font-display text-neutral-800 leading-tight tracking-tight relative pb-4"
+    class={` w-auto  font-display text-neutral-800 leading-tight tracking-tight relative pb-4 ${classTitle}`}
   >
     {title}
     <span

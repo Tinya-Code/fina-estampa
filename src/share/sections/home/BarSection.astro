@@ -1,44 +1,64 @@
 ---
+import SectionTitle from "../../components/SectionTitle.astro";
+import { Icon } from "astro-icon/components";
 
+const barData = {
+  title: "Cócteles y momentos inolvidables",
+  description:
+    "Disfruta de una variada carta de cócteles, bebidas y piqueos en un ambiente ideal para reunirse con amigos y familiares. Nuestro restobar es el lugar perfecto para relajarse, celebrar y acompañar cada momento con buena música y una atención excepcional.",
+  menuButton: {
+    text: "Ver menú",
+    link: "/menu",
+  },
+  contactButton: {
+    text: "Menu",
+    link: "/menu-desayunos-cocteles",
+  },
+  images: [
+    {
+      src: "/images/drinks/coctel-algarrobina.jpg",
+      alt: "Coctel con algarrobina",
+    },
+    {
+      src: "/images/drinks/pisco-sour.jpg",
+      alt: "Pisco sour",
+    },
+  ],
+};
 ---
 
-<section class="flex min-h-[calc(100dvh-70px)] py-6 px-0 md:py-12">
-  <div class="flex max-w-6xl mx-auto">
+<section class="flex bg-surface  py-6 px-0 md:py-12">
+  <div class="flex max-w-6xl mx-auto px-6">
     <div class="grid md:grid-cols-2 gap-16 items-center">
-      <div class="flex flex-col gap-4 px-4 md:px-0">
-        <h2
-          class="text-4xl md:text-5xl text-primary mb-8 font-serif tracking-wider"
-        >
-          Cócteles y momentos inolvidables
-        </h2>
+      <div class="flex flex-col mx-auto max-w-md gap-4 ">
+        <SectionTitle
+          title={barData.title}
+          align="left"
+        />
 
-        <p class="text-xl leading-relaxed text-primary mb-6">
-          Disfruta de una variada carta de cócteles, bebidas y piqueos en un
-          ambiente ideal para reunirse con amigos y familiares. Nuestro restobar
-          es el lugar perfecto para relajarse, celebrar y acompañar cada momento
-          con buena música y una atención excepcional.
+
+        <p class=" font-body  text-primary/80 mb-6">
+          {barData.description}
         </p>
-        <div class="flex justify-center">
+
+         <div>
           <a
-            href="/menu"
-            class="text-primary px-6 py-2 border-2 border-tertiary rounded-full font-semibold hover:bg-tertiary/20 transition-colors"
+            href={barData.contactButton.link}
+            class="inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3 font-body font-semibold text-white hover:scale-[1.02] transition-transform"
           >
-            Ver menú
+            <Icon name="lucide:calendar-check" class="size-5" />
+            {barData.contactButton.text}
           </a>
         </div>
       </div>
       <div class="flex flex-col gap-2">
-        <img
-          src="/images/drinks/coctel-algarrobina.jpg"
-          alt="Coctel con algarrobina"
-          class="max-h-60 object-cover"
-        />
-
-        <img
-          src="/images/drinks/pisco-sour.jpg"
-          alt="Pisco sour"
-          class="max-h-60 object-cover"
-        />
+        {barData.images.map((image) => (
+          <img
+            src={image.src}
+            alt={image.alt}
+            class="max-h-60 object-cover"
+          />
+        ))}
       </div>
     </div>
   </div>

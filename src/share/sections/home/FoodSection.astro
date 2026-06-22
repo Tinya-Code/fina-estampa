@@ -1,57 +1,59 @@
 ---
+import SectionTitle from "../../components/SectionTitle.astro";
+import { Icon } from "astro-icon/components";
 
+const foodData = {
+  title: "Tradición y sabor en cada plato",
+  images: [
+    {
+      src: "/images/food/arroz-con-pollo.png",
+      alt: "Arroz con pollo",
+    },
+    {
+      src: "/images/food/ceviche.png",
+      alt: "Ceviche",
+    },
+    {
+      src: "/images/food/seco-con-frejoles.png",
+      alt: "Seco con frejoles",
+    },
+  ],
+  contactButton: {
+    text: "Menu",
+    link: "/menu-desayunos-cocteles/",
+  },
+};
 ---
 
-<section class="flex min-h-[calc(100dvh-70px)] py-6 px-0 md:px-8">
+<section class="flex bg-surface py-6 px-0 md:px-6">
   <div class="flex max-w-6xl mx-auto">
     <div class="flex-1 flex flex-col items-center gap-6">
-      <div class="px-4 md:px-0">
-        <h2 class="text-4xl md:text-5xl text-primary mb-4 font-serif">
-          Tradición y sabor en cada plato
-        </h2>
-      </div>
+ 
+          <SectionTitle
+        title={foodData.title}
+    />
+
       <div class="w-full flex-1 grid grid-cols-1 md:grid-cols-3 gap-2">
-        <div class="col-span-1 flex flex-col gap-2">
-          <img
-            src="/images/food/arroz-con-pollo.png"
-            alt="Arroz con pollo"
-            class="w-full h-48 md:h-full object-cover"
-          />
-        </div>
-        <div class="col-span-1 flex flex-col gap-2">
-          <img
-            src="/images/food/ceviche.png"
-            alt="Ceviche"
-            class="w-full h-48 md:h-full object-cover"
-          />
-        </div>
-        <div class="col-span-1 flex flex-col gap-2">
-          <img
-            src="/images/food/seco-con-frejoles.png"
-            alt="Seco con frejoles"
-            class="w-full h-48 md:h-full object-cover"
-          />
-        </div>
+        {foodData.images.map((image) => (
+          <div class="col-span-1 flex flex-col gap-2">
+            <img
+              src={image.src}
+              alt={image.alt}
+              class="w-full h-48 md:h-full object-cover"
+            />
+          </div>
+        ))}
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-6 px-6 md:px-0">
-        <p
-          class="md:col-start-2 col-span-4 italic text-lg md:text-xl leading-relaxed text-primary mb-4 text-center"
-        >
-          Descubre una selección de nuestros platos más emblemáticos, preparados
-          con ingredientes de calidad y el auténtico sabor de la cocina criolla
-          peruana. Desde clásicos tradicionales hasta las especialidades de la
-          casa, cada receta está pensada para compartir y disfrutar en buena
-          compañía.
-        </p>
-      </div>
-      <div class="flex justify-center">
-        <a
-          href="/menu"
-          class="text-primary px-6 py-2 border-2 border-tertiary rounded-full font-semibold hover:bg-tertiary/20 transition-colors"
-        >
-          Ver carta
-        </a>
-      </div>
+
+          <div>
+          <a
+            href={foodData.contactButton.link}
+            class="inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3 font-body font-semibold text-white hover:scale-[1.02] transition-transform"
+          >
+            <Icon name="lucide:utensils" class="size-5" />
+            {foodData.contactButton.text}
+          </a>
+        </div>
     </div>
   </div>
 </section>

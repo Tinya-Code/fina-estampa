@@ -17,7 +17,7 @@
                 "price": 20,
                 "is_recommended": true,
                 "is_hidden": false,
-                "image_url": "",
+                "image_url": "/images/basico.png",
                 "cloudinary_id": ""
               },
               {
@@ -27,7 +27,7 @@
                 "price": 38,
                 "is_recommended": false,
                 "is_hidden": false,
-                "image_url": "",
+                "image_url": "/images/basico.png",
                 "cloudinary_id": ""
               },
               {
@@ -37,7 +37,7 @@
                 "price": 30,
                 "is_recommended": true,
                 "is_hidden": false,
-                "image_url": "",
+                "image_url": "/images/basico.png",
                 "cloudinary_id": ""
               },
               {
@@ -47,7 +47,7 @@
                 "price": 12,
                 "is_recommended": false,
                 "is_hidden": false,
-                "image_url": "",
+                "image_url": "/images/basico.png",
                 "cloudinary_id": ""
               },
               {
@@ -57,7 +57,7 @@
                 "price": 22,
                 "is_recommended": false,
                 "is_hidden": false,
-                "image_url": "",
+                "image_url": "/images/basico.png",
                 "cloudinary_id": ""
               },
               {
@@ -67,7 +67,7 @@
                 "price": 20,
                 "is_recommended": false,
                 "is_hidden": false,
-                "image_url": "",
+                "image_url": "/images/basico.png",
                 "cloudinary_id": ""
               },
               {
@@ -77,7 +77,7 @@
                 "price": 18,
                 "is_recommended": false,
                 "is_hidden": false,
-                "image_url": "",
+                "image_url": "/images/basico.png",
                 "cloudinary_id": ""
               }
             ]
@@ -100,7 +100,7 @@
                 "price": 28,
                 "is_recommended": true,
                 "is_hidden": false,
-                "image_url": "",
+                "image_url": "/images/basico.png",
                 "cloudinary_id": ""
               },
               {
@@ -110,7 +110,7 @@
                 "price": 35,
                 "is_recommended": false,
                 "is_hidden": false,
-                "image_url": "",
+                "image_url": "/images/basico.png",
                 "cloudinary_id": ""
               },
               {
@@ -120,7 +120,7 @@
                 "price": 35,
                 "is_recommended": true,
                 "is_hidden": false,
-                "image_url": "",
+                "image_url": "/images/basico.png",
                 "cloudinary_id": ""
               },
               {
@@ -130,7 +130,7 @@
                 "price": 35,
                 "is_recommended": false,
                 "is_hidden": false,
-                "image_url": "",
+                "image_url": "/images/basico.png",
                 "cloudinary_id": ""
               },
               {
@@ -140,7 +140,7 @@
                 "price": 30,
                 "is_recommended": true,
                 "is_hidden": false,
-                "image_url": "",
+                "image_url": "/images/basico.png",
                 "cloudinary_id": ""
               },
               {
@@ -150,7 +150,7 @@
                 "price": 40,
                 "is_recommended": true,
                 "is_hidden": false,
-                "image_url": "",
+                "image_url": "/images/basico.png",
                 "cloudinary_id": ""
               }
             ]
@@ -173,7 +173,7 @@
                 "price": 20,
                 "is_recommended": false,
                 "is_hidden": false,
-                "image_url": "",
+                "image_url": "/images/basico.png",
                 "cloudinary_id": ""
               },
               {
@@ -183,7 +183,7 @@
                 "price": 20,
                 "is_recommended": true,
                 "is_hidden": false,
-                "image_url": "",
+                "image_url": "/images/basico.png",
                 "cloudinary_id": ""
               },
               {
@@ -193,7 +193,7 @@
                 "price": 25,
                 "is_recommended": false,
                 "is_hidden": false,
-                "image_url": "",
+                "image_url": "/images/basico.png",
                 "cloudinary_id": ""
               }
             ]
@@ -216,7 +216,7 @@
                 "price": 18,
                 "is_recommended": false,
                 "is_hidden": false,
-                "image_url": "",
+                "image_url": "/images/basico.png",
                 "cloudinary_id": ""
               },
               {
@@ -226,7 +226,7 @@
                 "price": 18,
                 "is_recommended": false,
                 "is_hidden": false,
-                "image_url": "",
+                "image_url": "/images/basico.png",
                 "cloudinary_id": ""
               },
               {
@@ -236,7 +236,7 @@
                 "price": 18,
                 "is_recommended": false,
                 "is_hidden": false,
-                "image_url": "",
+                "image_url": "/images/basico.png",
                 "cloudinary_id": ""
               }
             ]
@@ -260,7 +260,7 @@
                 "price": 25,
                 "is_recommended": false,
                 "is_hidden": false,
-                "image_url": "",
+                "image_url": "/images/basico.png",
                 "cloudinary_id": ""
               },
               {
@@ -270,7 +270,7 @@
                 "price": 25,
                 "is_recommended": false,
                 "is_hidden": false,
-                "image_url": "",
+                "image_url": "/images/basico.png",
                 "cloudinary_id": ""
               },
               {
@@ -280,7 +280,7 @@
                 "price": 35,
                 "is_recommended": false,
                 "is_hidden": false,
-                "image_url": "",
+                "image_url": "/images/basico.png",
                 "cloudinary_id": ""
               },
               {
@@ -290,7 +290,7 @@
                 "price": 35,
                 "is_recommended": true,
                 "is_hidden": false,
-                "image_url": "",
+                "image_url": "/images/basico.png",
                 "cloudinary_id": ""
               }
             ]
@@ -313,7 +313,7 @@
                 "price": 5,
                 "is_recommended": false,
                 "is_hidden": false,
-                "image_url": "",
+                "image_url": "/images/basico.png",
                 "cloudinary_id": ""
               },
               {
@@ -323,7 +323,7 @@
                 "price": 7,
                 "is_recommended": false,
                 "is_hidden": false,
-                "image_url": "",
+                "image_url": "/images/basico.png",
                 "cloudinary_id": ""
               },
               {
@@ -333,7 +333,7 @@
                 "price": 4,
                 "is_recommended": false,
                 "is_hidden": false,
-                "image_url": "",
+                "image_url": "/images/basico.png",
                 "cloudinary_id": ""
               }
             ]
@@ -356,7 +356,7 @@
                 "price": 8,
                 "is_recommended": true,
                 "is_hidden": false,
-                "image_url": "",
+                "image_url": "/images/basico.png",
                 "cloudinary_id": ""
               },
               {
@@ -366,7 +366,7 @@
                 "price": 8,
                 "is_recommended": false,
                 "is_hidden": false,
-                "image_url": "",
+                "image_url": "/images/basico.png",
                 "cloudinary_id": ""
               },
               {
@@ -376,7 +376,7 @@
                 "price": 8,
                 "is_recommended": true,
                 "is_hidden": false,
-                "image_url": "",
+                "image_url": "/images/basico.png",
                 "cloudinary_id": ""
               },
               {
@@ -386,7 +386,7 @@
                 "price": 5,
                 "is_recommended": false,
                 "is_hidden": false,
-                "image_url": "",
+                "image_url": "/images/basico.png",
                 "cloudinary_id": ""
               },
               {
@@ -396,7 +396,7 @@
                 "price": 5,
                 "is_recommended": false,
                 "is_hidden": false,
-                "image_url": "",
+                "image_url": "/images/basico.png",
                 "cloudinary_id": ""
               }
             ]

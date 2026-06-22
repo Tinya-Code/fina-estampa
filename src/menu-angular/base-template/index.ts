@@ -136,7 +136,8 @@ import { BlockPromotionsComponent } from './blocks/block-promotions';
         }
       </div>
     </app-layout-scale>
-    <app-template-footer class="mt-20 block"></app-template-footer>
+    <!--
+    <app-template-footer class="mt-20 block"></app-template-footer> -->
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

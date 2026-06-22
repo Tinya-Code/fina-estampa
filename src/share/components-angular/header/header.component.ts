@@ -84,13 +84,13 @@ export class HeaderComponent {
       },
       {
         label: "La Fina",
-        href: "/la-fina-cieneguilla",
+        href: "#",
         icon: this.Compass,
         subtitle: "Sede Cieneguilla",
       },
       {
         label: "Contacto",
-        href: "/contacto-fina-estampa",
+        href: "#",
         icon: this.Mail,
         subtitle: "Escríbenos",
       },
@@ -122,8 +122,9 @@ export class HeaderComponent {
   isMinimal = computed(() => this.variant() === "minimal");
 
   private readonly platformId = inject(PLATFORM_ID);
+  private readonly destroyRef = inject(DestroyRef);
 
-  constructor(private destroyRef: DestroyRef) {
+  constructor() {
     if (isPlatformBrowser(this.platformId)) {
       this.updateCurrentPath();
 

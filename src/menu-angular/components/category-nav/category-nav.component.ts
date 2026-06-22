@@ -6,7 +6,7 @@ import { HeaderComponent } from "../../../share/components-angular/header/header
   imports: [HeaderComponent],
   template: `
     <div
-      class="sticky flex justify-between gap-1  top-0 z-40 bg-background/90 backdrop-blur-md border-b border-primary/10 shadow-sm py-4 px-4"
+      class="sticky flex justify-between items-center gap-1  top-0 z-40 bg-background/90 backdrop-blur-md border-b border-primary/10 shadow-sm py-3 px-4"
     >
       <div
         class="max-w-7xl mx-auto flex items-center gap-3 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"

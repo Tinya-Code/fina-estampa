@@ -1,5 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
+import SectionTitle from "../../components/SectionTitle.astro";
 
 const highlights = [
   {
@@ -21,49 +22,49 @@ const highlights = [
 ];
 ---
 
-<section
-  class="flex flex-col justify-between min-h-[calc(100dvh-70px)] py-6 px-0 md:pt-12 md:pb-0 bg-tertiary/10"
->
-  <div class="flex-1 flex flex-col justify-center max-w-6xl mx-auto">
-    <div class="grid md:grid-cols-2 gap-4 md:gap-16 items-center">
+<section class="flex flex-col justify-between bg-tertiary/10 py-8">
+  <div class="flex-1 flex flex-col justify-center px-4 max-w-6xl mx-auto">
+    <div
+      class="grid md:grid-cols-2 gap-4 md:gap-16 items-center justify-center"
+    >
       <img
         src="/images/restaurant/fina-estampa-familia.png"
         alt="Ambiente Fina Estampa"
-        class="order-2 md:order-1 h-full object-cover"
+        class="h-100 hidden md:block object-cover"
       />
-      <div class="flex flex-col gap-4 px-4 md:px-0">
-        <h2
-          class="text-4xl md:text-5xl mb-8 text-primary font-serif tracking-wider"
-        >
-          Familia Fina Estampa
-        </h2>
+      <div class="flex flex-col gap-4  md:px-0">
+        <SectionTitle title="Familia Fina Estampa" align="left" />
 
-        <p class="text-xl leading-relaxed mb-6 text-primary">
+        <p class=" mb-4 font-body text-primary">
           Este proyecto nació de la visión y esfuerzo de una familia apasionada
           por la buena cocina y la hospitalidad. Cada detalle de Fina Estampa
           refleja nuestro compromiso de hacer sentir a cada visitante como en
           casa.
         </p>
-        <p class="text-xl leading-relaxed text-tertiary font-bold mb-8 italic">
+        <p class=" text-accent font-display mb-4">
           Gracias por ser parte de nuestra historia.
         </p>
       </div>
+      <img
+        src="/images/restaurant/fina-estampa-familia.png"
+        alt="Ambiente Fina Estampa"
+        class="h-full md:hidden mx-auto pb-4 object-cover"
+      />
     </div>
   </div>
-  <div>
-    <div class="md:py-8 bg-primary grid grid-cols-2 md:grid-cols-4">
-      {
-        highlights.map((highlight) => (
-          <>
-            <div class="w-full flex flex-col items-center gap-2 px-6 md:px-8 py-6 md:py-2 border-r border-b md:border-b-0 border-tertiary/50">
-              <Icon name={highlight.icon} class="w-8 h-8 text-tertiary" />
-              <p class="text-white text-sm md:text-base text-center leading-tight">
-                {highlight.text}
-              </p>
-            </div>
-          </>
-        ))
-      }
-    </div>
+
+  <div class="md:py-8 hidden bg-primary grid grid-cols-2 md:grid-cols-4">
+    {
+      highlights.map((highlight) => (
+        <>
+          <div class="w-full flex flex-col items-center gap-2 px-6 md:px-8 py-6 md:py-2 border-r border-b md:border-b-0 border-tertiary/50">
+            <Icon name={highlight.icon} class="w-8 h-8 text-tertiary" />
+            <p class="text-white text-sm md:text-base   text-center leading-tight">
+              {highlight.text}
+            </p>
+          </div>
+        </>
+      ))
+    }
   </div>
 </section>

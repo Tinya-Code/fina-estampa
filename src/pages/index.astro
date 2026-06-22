@@ -1,11 +1,15 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Header from "../share/components/Header.astro";
-import Hero from "../share/components/Hero.astro";
+import { HeaderComponent } from "../share/components-angular/header/header.component";
+import { HeroSliderComponent } from "../share/components-angular/hero-slider/hero-slider.component";
 import AboutSection from "../share/sections/home/AboutSection.astro";
 import BarSection from "../share/sections/home/BarSection.astro";
 import ContactSection from "../share/sections/home/ContactSection.astro";
-import EventSection from "../share/sections/home/EventSection.astro";
+import { EVENTS_CONTENT } from "../data/events/events-content";
+import { EventsGalleryComponent } from "../share/components-angular/events-gallery/events-gallery.component";
+import FAQAccordion from "../share/sections/events/FAQAccordion.astro";
+import Footer from "../share/components/Footer.astro";
+
 import FoodSection from "../share/sections/home/FoodSection.astro";
 ---
 
@@ -14,50 +18,54 @@ import FoodSection from "../share/sections/home/FoodSection.astro";
   description="Bienvenido a Fina Estampa..."
   keywords="restaurante, criollo, cieneguilla"
 >
-  <Header />
-  <Hero
+  <HeaderComponent client:load />
+
+  <HeroSliderComponent
+    client:load
     slides={[
       {
         image: "/images/portada-fina-estampa.png",
         logo: "/fina-logo.svg",
-        title: "Fina Estampa",
-        subtitle: "Restaurante Criollo en Cieneguilla",
-        cta: {
-          text: "Ver Menú",
-          link: "/menu-desayunos-cocteles",
-          variant: "primary",
-        },
+
+
+  
       },
       {
-        image: "/images/portada-fina-estampa.png",
+        image: "/images/restaurant/fina-estampa-banner.png",
         logo: "/fina-logo.svg",
-        title: "Sabor Tradicional",
-        subtitle: "Comida Peruana Auténtica",
-        cta: {
-          text: "Reservar",
-          link: "/contacto",
-          variant: "primary",
-        },
+
+   
       },
       {
-        image: "/images/portada-fina-estampa.png",
+        image: "/images/restaurant/espacio-aire-libre.png",
         logo: "/fina-logo.svg",
-        title: "Ambiente Familiar",
-        subtitle: "Disfruta en Familia",
-        cta: {
-          text: "Contáctanos",
-          link: "/contacto",
-          variant: "primary",
-        },
+  
+  
       },
     ]}
     autoSlideInterval={5000}
     overlay={true}
     overlayOpacity={0.35}
   />
+
   <AboutSection />
   <FoodSection />
   <BarSection />
-  <EventSection />
+ <EventsGalleryComponent
+    client:load
+
+    title={EVENTS_CONTENT.gallery.title}
+    subtitle={EVENTS_CONTENT.gallery.subtitle}
+    cta={EVENTS_CONTENT.gallery.cta}
+  />
+     <FAQAccordion
+    title={EVENTS_CONTENT.faq.title}
+    subtitle={EVENTS_CONTENT.faq.subtitle}
+    questions={EVENTS_CONTENT.faq.questions}
+    cta={EVENTS_CONTENT.faq.cta}
+  />
+
   <ContactSection />
+
+  <Footer />
 </Layout>

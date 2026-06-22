@@ -5,7 +5,7 @@
   id="site-header"
   [ngClass]="[
     ' top-0  left-0 right-0 z-50 transition-all duration-500',
-    isMinimal() ? 'flex items-start justify-end ' : 'fixed mt-2 px-4 md:px-8',
+    isMinimal() ? 'flex items-start justify-end ' : 'fixed mt-2 px-2 md:px-8',
   ]"
 >
   @if (isMinimal()) {
@@ -18,25 +18,25 @@
       class="flex flex-col overflow-hidden justify-center items-center w-11 h-11 bg-primary/80 backdrop-blur-xl hover:bg-primary border border-white/10 rounded-full cursor-pointer transition-all duration-300"
       aria-label="Abrir menú"
     >
-      <div class="flex flex-col gap-[4px] w-5">
+      <div class="flex flex-col gap-1 w-5">
         <span
           id="ham-1"
           [ngClass]="[
-            'block w-full h-[1.5px] bg-white rounded-full origin-center transition-transform duration-300',
+            'block w-full h-0.5 bg-white rounded-full origin-center transition-transform duration-300',
             isMenuOpen() ? 'translate-y-[5.5px] rotate-45' : '',
           ]"
         ></span>
         <span
           id="ham-2"
           [ngClass]="[
-            'block w-full h-[1.5px] bg-white rounded-full origin-center transition-[transform,opacity] duration-300',
+            'block w-full h-0.5 bg-white rounded-full origin-center transition-[transform,opacity] duration-300',
             isMenuOpen() ? 'opacity-0 scale-x-0' : '',
           ]"
         ></span>
         <span
           id="ham-3"
           [ngClass]="[
-            'block w-full h-[1.5px] bg-white rounded-full origin-center transition-transform duration-300',
+            'block w-full h-0.5 bg-white rounded-full origin-center transition-transform duration-300',
             isMenuOpen() ? '-translate-y-[5.5px] -rotate-45' : '',
           ]"
         ></span>
@@ -46,7 +46,7 @@
     <!-- ── FULL VARIANT: Complete header bar ── -->
     <div
       id="header-container"
-      class="max-w-7xl mx-auto backdrop-blur-xl border border-white/10 rounded-2xl md:rounded-full px-4 flex items-center justify-between transition-all duration-500 relative bg-primary/92 h-14 md:h-16 border-white/15"
+      class="max-w-7xl mx-auto backdrop-blur-xl border border-white/10 rounded-sm md:rounded-full px-4 flex items-center justify-between transition-all duration-500 relative bg-primary/92 h-14 md:h-16 border-white/15"
     >
       <!-- Logo & Brand -->
       <a
@@ -117,32 +117,32 @@
 
         <!-- Hamburger Button (mobile only) -->
         <button
-          id="menu-toggle"
+          id="menu-toggle-minimal"
           (click)="toggleMenu()"
           [attr.aria-expanded]="isMenuOpen()"
           aria-controls="mobile-menu"
-          class="flex md:hidden flex-col justify-center items-center w-10 h-10 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full cursor-pointer transition-colors"
+          class="flex flex-col overflow-hidden justify-center md:hidden items-center w-11 h-11 bg-primary/80 backdrop-blur-xl hover:bg-primary border border-white/10 rounded-full cursor-pointer transition-all duration-300"
           aria-label="Abrir menú"
         >
-          <div class="flex flex-col gap-[4px] w-5">
+          <div class="flex flex-col gap-1 w-5">
             <span
               id="ham-1"
               [ngClass]="[
-                'block w-full h-[1.5px] bg-white rounded-full origin-center transition-transform duration-300',
+                'block w-full h-0.5 bg-white rounded-full origin-center transition-transform duration-300',
                 isMenuOpen() ? 'translate-y-[5.5px] rotate-45' : '',
               ]"
             ></span>
             <span
               id="ham-2"
               [ngClass]="[
-                'block w-full h-[1.5px] bg-white rounded-full origin-center transition-[transform,opacity] duration-300',
+                'block w-full h-0.5 bg-white rounded-full origin-center transition-[transform,opacity] duration-300',
                 isMenuOpen() ? 'opacity-0 scale-x-0' : '',
               ]"
             ></span>
             <span
               id="ham-3"
               [ngClass]="[
-                'block w-full h-[1.5px] bg-white rounded-full origin-center transition-transform duration-300',
+                'block w-full h-0.5 bg-white rounded-full origin-center transition-transform duration-300',
                 isMenuOpen() ? '-translate-y-[5.5px] -rotate-45' : '',
               ]"
             ></span>
@@ -172,7 +172,7 @@
 <div
   id="mobile-menu"
   [ngClass]="[
-    'fixed top-0  right-0 min-h-[100svh]  duration-500 z-[120] h-full w-[310px] bg-primary border-l border-white/10 shadow-2xl transition-transform duration-500 ease-in-out flex flex-col justify-between',
+    'fixed top-0  right-0 min-h-svh  duration-500 z-[120] h-full w-[310px] bg-surface border-l border-white/10 shadow-2xl transition-transform duration-500 ease-in-out flex flex-col justify-between',
     isMenuOpen() ? 'translate-x-0 ' : 'translate-x-full hidden',
   ]"
   [attr.aria-hidden]="!isMenuOpen()"
@@ -182,7 +182,7 @@
   <button
     id="menu-close"
     (click)="closeMenu()"
-    class="flex absolute top-4 right-4 items-center justify-center w-9 h-9 rounded-full bg-white/5 border border-white/10 text-white/70 hover:text-accent hover:bg-white/10 hover:border-accent/20 transition-all duration-200 cursor-pointer"
+    class="flex absolute top-2 right-2 items-center justify-center w-9 h-9 rounded-full bg-primary border border-primary text-white/70 hover:bg-accent hover:border-accent/20 transition-all duration-200 cursor-pointer"
     aria-label="Cerrar menú"
   >
     <lucide-icon [img]="X" class="w-5 h-5"></lucide-icon>
@@ -190,39 +190,26 @@
 
   <!-- Mobile Menu Links with Subtitles & Icons -->
   <nav class="flex-1 px-4 py-6 overflow-y-auto" aria-label="Navegación móvil">
-    <ul role="list" class="list-none m-0 p-0 flex flex-col gap-2">
+    <ul role="list" class="list-none pt-6 flex flex-col gap-2">
       @for (link of navConfig.links; track link.href) {
         <li>
           <a
             [href]="link.href"
             (click)="closeMenu()"
             [ngClass]="[
-              'flex items-center justify-between p-3.5 rounded-xl border border-transparent transition-all duration-300 group',
+              'flex items-center justify-between   border border-transparent transition-all duration-300 group',
               isLinkActive(link.href)
-                ? 'bg-accent/15 border-accent/20 text-accent font-bold shadow-sm'
-                : 'text-white/80 hover:text-white hover:bg-white/5',
+                ? 'border-accent/20 text-accent font-display '
+                : 'text-gray-900 hover:text-accent hover:bg-white/5',
             ]"
           >
             <div class="flex items-center gap-3.5">
-              <div
-                [ngClass]="[
-                  'w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-300',
-                  isLinkActive(link.href)
-                    ? 'bg-accent/20 text-accent'
-                    : 'bg-white/5 text-white/50 group-hover:text-accent group-hover:bg-accent/10',
-                ]"
-              >
-                <lucide-icon
-                  [img]="link.icon"
-                  class="w-4.5 h-4.5"
-                ></lucide-icon>
-              </div>
               <div class="flex flex-col">
-                <span class="text-sm font-semibold tracking-wide">{{
+                <span class="text-md font-display  tracking-wide">{{
                   link.label
                 }}</span>
                 <span
-                  class="text-[10px] text-white/40 font-medium group-hover:text-white/75 transition-colors"
+                  class="text-[10px] text-white/40  font-display group-hover:text-white/75 transition-colors"
                   >{{ link.subtitle }}</span
                 >
               </div>
@@ -234,7 +221,7 @@
                 'w-4 h-4 transition-transform duration-300 group-hover:translate-x-1',
                 isLinkActive(link.href)
                   ? 'text-accent'
-                  : 'text-white/20 group-hover:text-white/60',
+                  : 'text-primary/80 group-hover:text-accent',
               ]"
             ></lucide-icon>
           </a>
@@ -243,36 +230,4 @@
     </ul>
   </nav>
 
-  <!-- Mobile Drawer Footer (Socials, Contacts) -->
-  <div class="p-6 border-t border-white/5 bg-black/20 flex flex-col gap-5">
-    <!-- Contact Address and Email -->
-    <div class="flex flex-col gap-2.5">
-      <a
-        [href]="'mailto:' + navConfig.contact.email"
-        class="flex items-center gap-3 text-xs text-white/60 hover:text-accent transition-colors"
-      >
-        <lucide-icon [img]="Mail" class="w-4 h-4 text-accent"></lucide-icon>
-        <span>{{ navConfig.contact.email }}</span>
-      </a>
-      <div class="flex items-center gap-3 text-xs text-white/60">
-        <lucide-icon [img]="MapPin" class="w-4 h-4 text-accent"></lucide-icon>
-        <span>{{ navConfig.contact.address }}</span>
-      </div>
-    </div>
-
-    <!-- Social Media Row -->
-    <div class="flex items-center gap-3">
-      @for (social of navConfig.socials; track social.href) {
-        <a
-          [href]="social.href"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-lg bg-white/5 border border-white/10 text-xs text-white/80 hover:text-accent hover:bg-white/10 hover:border-accent/20 transition-all duration-300"
-        >
-          <lucide-icon [img]="social.icon" class="w-4 h-4"></lucide-icon>
-          <span>{{ social.name }}</span>
-        </a>
-      }
-    </div>
-  </div>
 </div>

@@ -1,6 +1,8 @@
 ---
 import { Icon } from "astro-icon/components";
 import restaurantData from "../../data/restaurant.json";
+import iconVisa from "../../share/icons/icon-visa.astro";
+import IconVisa from "../../share/icons/icon-visa.astro";
 
 const { restaurant, settings } = restaurantData.data;
 const socialMedia = settings.business_config.social_media;
@@ -33,10 +35,9 @@ const FOOTER_TEXTS = {
     title: "Reparto a Domicilio",
   },
   paymentMethods: {
-    title: "Medios de Pago Aceptados",
-    cash: "Efectivo",
-    digital: "Yape / Plin",
+    title: "Métodos de Pago",
   },
+
   developer: {
     label: "Desarrollado por",
     name: "Tinya Code",
@@ -240,7 +241,7 @@ const getDayLabel = (day: string) => {
 
     <!-- Zonas de Reparto (Delivery) -->
     <div class="flex flex-col gap-2 items-center md:items-start">
-      <span class="text-xs uppercase tracking-wider text-accent font-semibold"
+      <span class="text-xs uppercase tracking-wider text-accent font-display"
         >{FOOTER_TEXTS.delivery.title}</span
       >
       <div class="flex flex-wrap gap-1.5 justify-center md:justify-start">
@@ -256,22 +257,12 @@ const getDayLabel = (day: string) => {
 
     <!-- Métodos de Pago -->
     <div class="flex flex-col gap-2 items-center md:items-start">
-      <span class="text-xs uppercase tracking-wider text-accent font-semibold"
+      <span class="text-xs uppercase tracking-wider text-accent font-display"
         >{FOOTER_TEXTS.paymentMethods.title}</span
       >
       <div class="flex items-center gap-3 mt-1">
-        <div
-          class="flex items-center gap-1.5 bg-secondary/30 px-2.5 py-1.5 rounded-md text-xs font-semibold"
-        >
-          <Icon name="lucide:banknote" class="w-4 h-4 text-accent" />
-          <span>{FOOTER_TEXTS.paymentMethods.cash}</span>
-        </div>
-        <div
-          class="flex items-center gap-1.5 bg-secondary/30 px-2.5 py-1.5 rounded-md text-xs font-semibold"
-        >
-          <Icon name="lucide:smartphone" class="w-4 h-4 text-accent" />
-          <span>{FOOTER_TEXTS.paymentMethods.digital}</span>
-        </div>
+        <IconVisa height="44" width="54" />
+        <img src="/images/yape-image.png" alt="Visa" class="w-8 h-8"/>
       </div>
     </div>
   </div>

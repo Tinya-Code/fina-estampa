@@ -1,45 +1,68 @@
 ---
-
+import SectionTitle from "../../components/SectionTitle.astro";
 ---
 
-<section class="flex min-h-[calc(100dvh-70px)] py-6 px-0 md:py-12">
-  <div class="flex max-w-6xl mx-auto">
-    <div class="grid md:grid-cols-2 gap-0 md:gap-16 items-center">
-      <div class="flex flex-col gap-4 px-4 md:px-0">
-        <h2 class="text-4xl md:text-5xl text-primary mb-8 font-serif">
-          Conócenos
-        </h2>
+<section class="flex bg-surface py-8 mx-auto px-6  md:py-12 overflow-hidden">
+  <div
+    class="grid max-w-6xl md:grid-cols-2 mx-auto w-full py-8 md:flex-row gap-16 lg:gap-8 items-center justify-items-center-safe"
+  >
+    <div class="flex flex-col gap-4 z-10 mx-auto max-w-md ">
+      <SectionTitle
+        title="El auténtico sabor de la cocina criolla"
+        align="left"
+      />
+      <p class=" font-body text-primary/80">
+        En Fina Estampa celebramos la tradición y el sabor de la cocina criolla
+        peruana en un ambiente cálido y familiar.
+        <br />
+        Disfruta de nuestros platos preparados con pasión, una variada propuesta
+        de restobar y eventos especiales que convierten cada visita en una
+        experiencia para compartir y recordar.
+      </p>
+    </div>
 
-        <p class="text-xl leading-relaxed text-primary mb-6">
-          En Fina Estampa celebramos la tradición y el sabor de la cocina
-          criolla peruana en un ambiente cálido y familiar. Disfruta de nuestros
-          platos preparados con pasión, una variada propuesta de restobar y
-          eventos especiales que convierten cada visita en una experiencia para
-          compartir y recordar.
-        </p>
-      </div>
-      <div class="grid grid-cols-5 gap-2">
-        <div class="col-span-3 flex flex-col gap-2">
-          <img
-            src="/images/food/pan-con-pollo.JPG"
-            alt="Pan con pollo y jugo - Sabor tradicional"
-            class="w-full flex-1 object-cover"
-          />
+    <!-- Grid de imágenes -->
+    <div class="flex relative max-h-70  gap-2 justify-center items-center">
+      <img
+      id="img1"
+        src="/images/drinks/coctel-tropical-vert.jpg"
+        alt="Arroz con mariscos"
+        class="absolute border-2 border-white -top-14 -left-16 lg:-left-30 w-30 lg:w-40 h-40 lg:h-50 object-cover rounded-md"
+      />
+      <img
+        id="img2"
+        src="/images/food/arroz-con-marisco.png"
+        alt="Pan con pollo y jugo - Sabor tradicional"
+        class="absolute border-2 border-white -bottom-16 -right-16 lg:-right-30 w-40 h-30 lg:w-50 lg:h-40 object-cover rounded-md"
+      />
 
-          <img
-            src="/images/food/arroz-con-marisco.png"
-            alt="Arroz con mariscos"
-            class="w-full flex-1 object-cover"
-          />
-        </div>
-        <div class="col-span-2">
-          <img
-            src="/images/drinks/coctel-tropical-vert.jpg"
-            alt="Cóctel tropical"
-            class="w-full h-full object-cover"
-          />
-        </div>
-      </div>
+      <img
+        src="/images/food/pan-con-pollo.JPG"
+        alt="Cóctel tropical"
+        class="w-full max-w-70 lg:max-w-90  h-full max-h-70  mx-auto object-cover rounded-md"
+      />
     </div>
   </div>
 </section>
+<script>
+  let images = document.querySelectorAll("#img1, #img2");
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        window.addEventListener("scroll", () => {
+          const scrollY = window.scrollY;
+          if (entry.target.id === "img1") {
+            entry.target.style.transform = `translateY(${scrollY * 0.1}px)`;
+          }
+          if (entry.target.id === "img2") {
+            entry.target.style.transform = `translateY(${scrollY * -0.1}px)`;
+          }
+     
+        });
+      }
+    });
+  }, { threshold: 0.8 }); // se activa cuando al menos 10% de la imagen entra al viewport
+
+  images.forEach(img => observer.observe(img));
+</script> 
