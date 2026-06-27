@@ -8,8 +8,8 @@
   --color-surface: #f4f4f5;
   --color-accent: #f9a243;
   --color-highlight: #f9a243;
-  --font-display: "Expose-Bold", sans-serif;
-  --font-body: "Expose-Regular", sans-serif;
+  --font-display:"Expose-Bold" , serif;
+  --font-body: "Poppins", sans-serif;
 }
 
 html {
