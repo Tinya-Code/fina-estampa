@@ -1,6 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
 import SectionTitle from "../../components/SectionTitle.astro";
+import Map from "../../components/map.astro";
 
 const contactData = {
   title: "Contáctanos",
@@ -89,12 +90,13 @@ const contactItems = [
             ))
           }
         </address>
+     
   
       </div>
 
-      <!-- MAP -->
+      
       <div class="overflow-hidden rounded-3xl min-h-60 shadow-xl ">
-        <iframe
+       <!-- MAP  <iframe
           src={contactData.mapSrc}
           width="100%"
           height="100%"
@@ -104,7 +106,10 @@ const contactItems = [
           title="Mapa de ubicación de Fina Estampa"
           referrerpolicy="no-referrer-when-downgrade"
         />
+        -->
+            <Map />
       </div>
+     
     </div>
   </div>
 </section>

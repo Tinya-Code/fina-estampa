@@ -1,21 +1,29 @@
 {
-  "data":[],
-  "s": [
-    {
-      "id": "CMB001",
-      "name": "Combo Maquilovers",
-      "description": "24 cortes (4 sabores a elección) + 6 alistas + 1 Gaseosa personal",
-      "price": 53,
-      "url": "/images/combos/combo-makilovers.png",
-      "cloudinary_id": ""
-    },
-    {
-      "id": "CMB002",
-      "name": "Combo familiar",
-      "description": "48 cortes (4 sabores a elección) + 2 gaseosa (250ml)",
-      "price": 85,
-      "url": "/images/combos/combo-1.png",
-      "cloudinary_id": ""
-    }
-  ]
+  "data":[
+  {
+    "id": "CMB001",
+    "name": "Combo 1",
+    "description": "½ Kg de Chicharrón, Camote frito, Cancha, Sarza criolla, 2 Panes y 1 Café",
+    "price": 25.00,
+    "url": "/images/basico.png",
+    "cloudinary_id": ""
+  },
+  {
+    "id": "CMB002",
+    "name": "Combo 2",
+    "description": "½ Kg de Chicharrón, Camote frito, Cancha, Sarza criolla, 4 Panes y 2 Cafés",
+    "price": 50.00,
+    "url": "/images/basico.png",
+    "cloudinary_id": ""
+  },
+  {
+    "id": "CMB003",
+    "name": "Combo 3",
+    "description": "1 Kg de Chicharrón, Camote frito, Cancha, Sarza criolla, 6 Panes y 3 Cafés",
+    "price": 95.00,
+    "url": "/images/basico.png",
+    "cloudinary_id": ""
+  }
+]
+
 }

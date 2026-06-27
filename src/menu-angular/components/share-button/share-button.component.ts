@@ -9,7 +9,7 @@ import { LucideAngularModule, Share2 } from 'lucide-angular';
   template: `
     <button
       (click)="shareMenu()"
-      class="flex items-center gap-2 px-4 py-2 bg-primary/80 hover:bg-primary text-white rounded-sm transition-all duration-300 font-bold border border-primary/20 group backdrop-blur-sm"
+      class="flex items-center gap-2 px-4 py-2 bg-primary/80 hover:bg-primary text-white rounded-full transition-all duration-300 font-bold border border-primary/20 group backdrop-blur-sm"
       title="Compartir este menú"
     >
       <lucide-icon
@@ -27,7 +27,7 @@ export class ShareButtonComponent {
   async shareMenu() {
     const url = window.location.href;
     const shareData = {
-      title: 'Menú Chifa',
+      title: 'Menú',
       text: '¡Mira este delicioso menú! 🍜🏮',
       url: url,
     };

@@ -1,0 +1,477 @@
+---
+/**
+ * RoutePhotoGuide.astro
+ * Versión "Story Style" con autoplay, minimapa y navegación
+ */
+export type RouteCmd = 'start' | 'forward' | 'right' | 'left' | 'back' | 'curve-right' | 'curve-left' | 'end';
+
+export interface RouteCommand {
+  cmd: RouteCmd;
+  step?: number;
+}
+
+export interface Step {
+  image: string;
+  label: string;
+  instruction: string;
+  waypointIndex: number;
+  arrowDir?: 'right' | 'left' | 'up' | 'down' | null;
+}
+
+// ── Datos de ejemplo ──────────────────────────────────────────
+const routeCommands: RouteCommand[] = [
+  { cmd: "start" },
+  { cmd: "forward", step: 25 },
+  { cmd: "forward", step: 25 },
+  { cmd: "forward", step: 20 },
+  { cmd: "right", step: 15 },
+  { cmd: "forward", step: 25 },
+  { cmd: "forward", step: 20 },
+  { cmd: "left", step: 15 },
+  { cmd: "forward", step: 20 },
+  { cmd: "forward", step: 15 },
+  { cmd: "curve-right" },
+  { cmd: "forward", step: 15 },
+  { cmd: "right", step: 12 },
+  { cmd: "forward", step: 12 },
+  { cmd: "forward", step: 10 },
+  { cmd: "right", step: 8 },
+  { cmd: "end" },
+];
+
+const steps: Step[] = [
+  { image: "/images/mapa/mapa-1.jpg", label: "Punto de partida", instruction: "Inicio de la ruta hacia Fina Estampa", waypointIndex: 0, arrowDir: "right" },
+  { image: "/images/mapa/mapa-2.jpg", label: "Avanzando por la carretera", instruction: "Continúa recto por la carretera principal", waypointIndex: 1, arrowDir: "right" },
+  { image: "/images/mapa/mapa-3.jpg", label: "Curva a la derecha", instruction: "Toma la curva hacia la derecha", waypointIndex: 2, arrowDir: "right" },
+  { image: "/images/mapa/mapa-4.jpg", label: "Entrada a Cieneguilla", instruction: "Bienvenido a Cieneguilla, continúa recto", waypointIndex: 3, arrowDir: "right" },
+  { image: "/images/mapa/mapa-5.jpg", label: "Cruce principal", instruction: "Pasa el cruce principal", waypointIndex: 4, arrowDir: "right" },
+  { image: "/images/mapa/mapa-6.jpg", label: "Giro a la izquierda", instruction: "Gira a la izquierda en la próxima intersección", waypointIndex: 5, arrowDir: "left" },
+  { image: "/images/mapa/mapa-7.jpg", label: "Calle Inca Roca", instruction: "Entra a la calle Inca Roca", waypointIndex: 6, arrowDir: "right" },
+  { image: "/images/mapa/mapa-8.jpg", label: "Avanzando por Inca Roca", instruction: "Continúa por Inca Roca", waypointIndex: 7, arrowDir: "right" },
+  { image: "/images/mapa/mapa-9.jpg", label: "Referencia visual", instruction: "Verás el letrero de Fina Estampa", waypointIndex: 8, arrowDir: "right" },
+  { image: "/images/mapa/mapa-10.jpg", label: "Estacionamiento", instruction: "El estacionamiento está a la derecha", waypointIndex: 9, arrowDir: "right" },
+  { image: "/images/mapa/mapa-11.jpg", label: "Entrada principal", instruction: "Entrada principal del restaurante", waypointIndex: 10, arrowDir: "right" },
+  { image: "/images/mapa/mapa-12.jpg", label: "Recepción", instruction: "Bienvenido a la recepción", waypointIndex: 11, arrowDir: "right" },
+  { image: "/images/mapa/mapa-13.jpg", label: "Área de comedor", instruction: "Área principal de comedor", waypointIndex: 12, arrowDir: "right" },
+  { image: "/images/mapa/mapa-14.jpg", label: "Vista al jardín", instruction: "Disfruta de la vista al jardín", waypointIndex: 13, arrowDir: "right" },
+  { image: "/images/mapa/mapa-15.jpg", label: "Bar", instruction: "Nuestra área de bar", waypointIndex: 14, arrowDir: "right" },
+  { image: "/images/mapa/mapa-16.jpg", label: "Fina Estampa", instruction: "¡Has llegado a Fina Estampa!", waypointIndex: 15, arrowDir: null },
+];
+
+const title = "Cómo llegar a Fina Estampa";
+const startLabel = "Inicio";
+const endLabel = "Fina Estampa";
+
+// ── Construcción de waypoints ──────────────────────────────
+type Dir = 'up' | 'right' | 'down' | 'left';
+
+function buildWaypoints(commands: RouteCommand[]): { x: number; y: number }[] {
+  const DEFAULT_STEP = 20;
+  const MARGIN = 14;
+  let x = 0, y = 0;
+  let dir: Dir = 'up';
+  const raw: { x: number; y: number }[] = [];
+  const dx: Record<Dir, number> = { up: 0,  right: 1, down: 0,  left: -1 };
+  const dy: Record<Dir, number> = { up: -1, right: 0, down: 1,  left:  0 };
+  const turnRight: Record<Dir, Dir> = { up: 'right', right: 'down', down: 'left',  left: 'up'   };
+  const turnLeft:  Record<Dir, Dir> = { up: 'left',  left:  'down', down: 'right', right: 'up'  };
+
+  for (const { cmd, step: s } of commands) {
+    const len = s ?? DEFAULT_STEP;
+    switch (cmd) {
+      case 'start': raw.push({ x, y }); break;
+      case 'forward':
+        x += dx[dir] * len; y += dy[dir] * len; raw.push({ x, y }); break;
+      case 'right':
+        dir = turnRight[dir]; x += dx[dir] * len; y += dy[dir] * len; raw.push({ x, y }); break;
+      case 'left':
+        dir = turnLeft[dir]; x += dx[dir] * len; y += dy[dir] * len; raw.push({ x, y }); break;
+      case 'back':
+        dir = turnRight[turnRight[dir]]; x += dx[dir] * len; y += dy[dir] * len; raw.push({ x, y }); break;
+      case 'curve-right': {
+        const nr = turnRight[dir];
+        x += dx[dir] * len * 0.65 + dx[nr] * len * 0.65;
+        y += dy[dir] * len * 0.65 + dy[nr] * len * 0.65;
+        dir = nr; raw.push({ x, y }); break;
+      }
+      case 'curve-left': {
+        const nl = turnLeft[dir];
+        x += dx[dir] * len * 0.65 + dx[nl] * len * 0.65;
+        y += dy[dir] * len * 0.65 + dy[nl] * len * 0.65;
+        dir = nl; raw.push({ x, y }); break;
+      }
+      case 'end': raw.push({ x, y }); break;
+    }
+  }
+
+  if (raw.length === 0) return [{ x: 100, y: 260 }];
+  const xs = raw.map(p => p.x), ys = raw.map(p => p.y);
+  const minX = Math.min(...xs), maxX = Math.max(...xs);
+  const minY = Math.min(...ys), maxY = Math.max(...ys);
+  const rangeX = maxX - minX || 1, rangeY = maxY - minY || 1;
+  const usableW = 200 - MARGIN * 2, usableH = 300 - MARGIN * 2;
+  const scale = Math.min(usableW / rangeX, usableH / rangeY);
+  const offsetX = MARGIN + (usableW - rangeX * scale) / 2;
+  const offsetY = MARGIN + (usableH - rangeY * scale) / 2;
+  return raw.map(p => ({
+    x: Math.round((p.x - minX) * scale + offsetX),
+    y: Math.round((p.y - minY) * scale + offsetY),
+  }));
+}
+
+const waypoints = buildWaypoints(routeCommands);
+const polylinePoints = waypoints.map(p => `${p.x},${p.y}`).join(' ');
+const walkerStart = waypoints[0] ?? { x: 100, y: 260 };
+const walkerEnd = waypoints[waypoints.length - 1] ?? { x: 100, y: 14 };
+const waypointsJson = JSON.stringify(waypoints);
+const stepsJson = JSON.stringify(steps);
+---
+
+<!-- ─── MARKUP ──────────────────────────────────────────────── -->
+<div class="relative" id="rpg-container">
+  
+  <!-- Barra de progreso (puntos) -->
+  <div class="flex gap-1 px-3 pt-3 pb-1">
+    {steps.map((_, i) => (
+      <div
+        class={`h-1 flex-1 rounded-full transition-colors duration-300 ${
+          i === 0 ? 'bg-accent' : 'bg-gray-200'
+        }`}
+        data-progress-dot
+        data-index={i}
+      ></div>
+    ))}
+  </div>
+
+  <!-- Contenedor del slide -->
+  <div class="relative" id="rpg-slide-container">
+    {steps.map((step, index) => (
+      <div
+        class={`rpg-slide transition-opacity duration-300 ${
+          index === 0 ? 'opacity-100 relative' : 'opacity-0 absolute inset-0 pointer-events-none'
+        }`}
+        data-slide-index={index}
+      >
+        <!-- Foto -->
+        <div class="relative aspect-[4/3] bg-gray-100">
+          <img
+            src={step.image}
+            alt={step.label}
+            class="w-full h-full object-cover"
+            loading={index === 0 ? 'eager' : 'lazy'}
+          />
+          <!-- Degradado inferior -->
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none"></div>
+
+          <!-- Información superpuesta -->
+          <div class="absolute bottom-0 left-0 right-0 p-4 text-white">
+            <div class="flex items-center gap-2 text-sm font-medium">
+              <span class="inline-block bg-accent text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <span class="truncate">{step.label}</span>
+            </div>
+            <p class="text-sm mt-1 text-gray-100 leading-snug">{step.instruction}</p>
+            {step.arrowDir && (
+              <span class="inline-block mt-1 text-xs font-medium text-accent">
+                {step.arrowDir === 'right' && '→ Gira a la derecha'}
+                {step.arrowDir === 'left'  && '← Gira a la izquierda'}
+                {step.arrowDir === 'up'    && '↑ Sigue recto'}
+                {step.arrowDir === 'down'  && '↓ Gira atrás'}
+              </span>
+            )}
+          </div>
+
+          <!-- Flecha de dirección (grande) -->
+          {step.arrowDir && (
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white/40">
+              <svg class="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                {step.arrowDir === 'right' && <path d="M5 12h14M13 6l6 6-6 6"/>}
+                {step.arrowDir === 'left'  && <path d="M19 12H5M11 18l-6-6 6-6"/>}
+                {step.arrowDir === 'up'    && <path d="M12 19V5M6 11l6-6 6 6"/>}
+                {step.arrowDir === 'down'  && <path d="M12 5v14M18 13l-6 6-6-6"/>}
+              </svg>
+            </div>
+          )}
+        </div>
+
+        <!-- Minimapa -->
+        <div class="absolute bg-[url('/images/mapa/mapa.png')] bg-cover bottom-4 right-4 w-44 h-36  overflow-hidden">
+          <svg
+            viewBox="0 0 200 300"
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-full h-full rotate-90"
+          >
+            <polyline
+              fill="none"
+              stroke="#dee2e6"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              points={polylinePoints}
+            />
+            <polyline
+              id={`rpg-route-done-${index}`}
+              fill="none"
+              stroke="#1a73e8"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              points=""
+            />
+            {waypoints.map((wp, i) => (
+              <circle
+                key={i}
+                cx={wp.x}
+                cy={wp.y}
+                r="5.5"
+                fill={i === 0 ? '#34a853' : '#adb5bd'}
+                stroke="#fff"
+                stroke-width="0.8"
+              />
+            ))}
+            <g id={`rpg-walker-${index}`} transform={`translate(${walkerStart.x},${walkerStart.y})`}>
+              <circle cy="-16" r="3.5" fill="#fbbc04" stroke="#f9ab00" stroke-width="0.6"/>
+              <line x1="0" y1="-11" x2="0" y2="-2" stroke="#fbbc04" stroke-width="2"/>
+              <line x1="0" y1="-2" x2="-2" y2="3" stroke="#fbbc04" stroke-width="1.5" class="leg-l"/>
+              <line x1="0" y1="-2" x2="2"  y2="3" stroke="#fbbc04" stroke-width="1.5" class="leg-r"/>
+            </g>
+            <circle
+              cx={walkerEnd.x}
+              cy={walkerEnd.y}
+              r="10"
+              fill="#ea4335"
+              stroke="#fff"
+              stroke-width="1"
+      
+            />
+          </svg>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <!-- Controles laterales -->
+  <button
+    id="rpg-btn-prev"
+    class="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-white/80 shadow-md flex items-center justify-center text-gray-700 hover:bg-white transition-colors disabled:opacity-30 disabled:pointer-events-none"
+    style="margin-top: 10px;"
+    aria-label="Paso anterior"
+    disabled
+  >
+    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+  </button>
+  <button
+    id="rpg-btn-next"
+    class="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-white/80 shadow-md flex items-center justify-center text-gray-700 hover:bg-white transition-colors disabled:opacity-30 disabled:pointer-events-none"
+    style="margin-top: 10px;"
+    aria-label="Siguiente paso"
+  >
+    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+  </button>
+
+  <!-- Contador de pasos -->
+  <div class="text-center text-xs text-gray-400 py-2 border-t border-gray-100">
+    <span id="rpg-current-step">1</span> / <span>{steps.length}</span>
+    
+  </div>
+</div>
+
+<!-- ─── SCRIPT ────────────────────────────────────────────────── -->
+<script define:vars={{ waypointsJson, stepsJson }}>
+(function () {
+  const waypoints = JSON.parse(waypointsJson);
+  const steps     = JSON.parse(stepsJson);
+  const total     = steps.length;
+  let current     = 0;
+  let autoplayTimer = null;
+  const INTERVAL = 4000; // 5 segundos
+
+  const container   = document.getElementById('rpg-container');
+  const slides      = document.querySelectorAll('.rpg-slide');
+  const dots        = document.querySelectorAll('[data-progress-dot]');
+  const btnPrev     = document.getElementById('rpg-btn-prev');
+  const btnNext     = document.getElementById('rpg-btn-next');
+  const stepNumEl   = document.getElementById('rpg-current-step');
+  const statusEl    = document.getElementById('rpg-autoplay-status');
+  const slideContainer = document.getElementById('rpg-slide-container');
+
+  // Actualizar mapa
+  function updateMap(index) {
+    const slide = slides[index];
+    if (!slide) return;
+    const walkerEl = slide.querySelector(`[id^="rpg-walker-"]`);
+    const routeEl  = slide.querySelector(`[id^="rpg-route-done-"]`);
+    if (!walkerEl || !routeEl) return;
+
+    const stepData = steps[index];
+    const wIdx = stepData?.waypointIndex ?? 0;
+    const wp = waypoints[Math.min(wIdx, waypoints.length - 1)];
+
+    walkerEl.setAttribute('transform', `translate(${wp.x},${wp.y})`);
+    const pts = waypoints
+      .slice(0, Math.min(wIdx + 1, waypoints.length))
+      .map(p => `${p.x},${p.y}`)
+      .join(' ');
+    routeEl.setAttribute('points', pts);
+  }
+
+  // Cambiar de paso
+  function goTo(index, fromAutoplay = false) {
+    if (index < 0 || index >= total) return;
+    current = index;
+
+    slides.forEach((slide, i) => {
+      const isActive = i === current;
+      slide.classList.toggle('opacity-100', isActive);
+      slide.classList.toggle('relative', isActive);
+      slide.classList.toggle('opacity-0', !isActive);
+      slide.classList.toggle('absolute', !isActive);
+      slide.classList.toggle('inset-0', !isActive);
+      slide.classList.toggle('pointer-events-none', !isActive);
+    });
+
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('bg-accent', i <= current);
+      dot.classList.toggle('bg-gray-200', i > current);
+    });
+
+    btnPrev.disabled = current === 0;
+    btnNext.disabled = current === total - 1;
+    stepNumEl.textContent = current + 1;
+
+    updateMap(current);
+
+    // Si llegamos al final, detener autoplay
+    if (current === total - 1) {
+      stopAutoplay();
+      if (statusEl) statusEl.textContent = '⏸ fin';
+    }
+  }
+
+  // Autoplay
+  function startAutoplay() {
+    if (autoplayTimer) return;
+    if (current === total - 1) return; // no avanzar si ya estamos al final
+    autoplayTimer = setInterval(() => {
+      if (current < total - 1) {
+        goTo(current + 1, true);
+      } else {
+        stopAutoplay();
+      }
+    }, INTERVAL);
+    if (statusEl) statusEl.textContent = '▶ reproduciendo';
+  }
+
+  function stopAutoplay() {
+    if (autoplayTimer) {
+      clearInterval(autoplayTimer);
+      autoplayTimer = null;
+    }
+    if (statusEl && current < total - 1) statusEl.textContent = '⏸ pausado';
+  }
+
+  function toggleAutoplay() {
+    if (autoplayTimer) {
+      stopAutoplay();
+    } else {
+      startAutoplay();
+    }
+  }
+
+  // Pausa al hacer hover/touch
+  function pauseAutoplay() {
+    if (autoplayTimer) {
+      stopAutoplay();
+      // Guardamos estado para reanudar después del hover
+      container.dataset.wasPlaying = 'true';
+    } else {
+      container.dataset.wasPlaying = 'false';
+    }
+  }
+
+  function resumeAutoplay() {
+    if (container.dataset.wasPlaying === 'true' && current < total - 1) {
+      startAutoplay();
+    }
+    container.dataset.wasPlaying = 'false';
+  }
+
+  // Eventos de hover (pausa/reanuda)
+  container.addEventListener('mouseenter', pauseAutoplay);
+  container.addEventListener('mouseleave', resumeAutoplay);
+  // Para móviles: tocar el contenedor pausa/reanuda manualmente
+  container.addEventListener('click', (e) => {
+    // Si el clic no fue en un botón, toggle autoplay
+    if (!e.target.closest('button')) {
+      toggleAutoplay();
+    }
+  });
+
+  // Botones
+  btnPrev.addEventListener('click', (e) => {
+    e.stopPropagation();
+    stopAutoplay();
+    goTo(current - 1);
+    // Reiniciar autoplay si no estamos al final
+    if (current < total - 1) startAutoplay();
+  });
+
+  btnNext.addEventListener('click', (e) => {
+    e.stopPropagation();
+    stopAutoplay();
+    goTo(current + 1);
+    if (current < total - 1) startAutoplay();
+  });
+
+  // Teclado
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      stopAutoplay();
+      goTo(Math.min(current + 1, total - 1));
+      if (current < total - 1) startAutoplay();
+    }
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      stopAutoplay();
+      goTo(Math.max(current - 1, 0));
+      if (current < total - 1) startAutoplay();
+    }
+  });
+
+  // Swipe
+  let touchX = 0;
+  slideContainer.addEventListener('touchstart', (e) => {
+    touchX = e.changedTouches[0].clientX;
+  }, { passive: true });
+  slideContainer.addEventListener('touchend', (e) => {
+    const diff = touchX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) {
+      stopAutoplay();
+      if (diff > 0) goTo(Math.min(current + 1, total - 1));
+      else goTo(Math.max(current - 1, 0));
+      if (current < total - 1) startAutoplay();
+    }
+  }, { passive: true });
+
+  // Iniciar autoplay al cargar
+  startAutoplay();
+})();
+</script>
+
+<!-- ─── Estilos ───────────────────────────────────────────────── -->
+<style is:global>
+  .leg-l, .leg-r {
+    transform-origin: 0 -2px;
+    animation: walk 0.44s infinite alternate ease-in-out;
+  }
+  .leg-r { animation-direction: alternate-reverse; }
+  @keyframes walk {
+    from { transform: rotate(-18deg); }
+    to   { transform: rotate(18deg); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .leg-l, .leg-r { animation: none; }
+  }
+</style>
