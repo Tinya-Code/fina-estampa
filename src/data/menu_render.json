@@ -25,7 +25,7 @@
                 "name": "Lomo fino anticuchero",
                 "description": "Brochetas de lomo fino con salsa anticuchera.",
                 "price": 38,
-                "is_recommended": false,
+                "is_recommended": true,
                 "is_hidden": false,
                 "image_url": "/images/basico.png",
                 "cloudinary_id": ""
@@ -313,7 +313,7 @@
                 "price": 5,
                 "is_recommended": false,
                 "is_hidden": false,
-                "image_url": "/images/basico.png",
+                "image_url": "",
                 "cloudinary_id": ""
               },
               {
@@ -323,7 +323,7 @@
                 "price": 7,
                 "is_recommended": false,
                 "is_hidden": false,
-                "image_url": "/images/basico.png",
+                "image_url": "",
                 "cloudinary_id": ""
               },
               {
@@ -333,7 +333,7 @@
                 "price": 4,
                 "is_recommended": false,
                 "is_hidden": false,
-                "image_url": "/images/basico.png",
+                "image_url": "",
                 "cloudinary_id": ""
               }
             ]
@@ -356,7 +356,7 @@
                 "price": 8,
                 "is_recommended": true,
                 "is_hidden": false,
-                "image_url": "/images/basico.png",
+                "image_url": "",
                 "cloudinary_id": ""
               },
               {
@@ -366,7 +366,7 @@
                 "price": 8,
                 "is_recommended": false,
                 "is_hidden": false,
-                "image_url": "/images/basico.png",
+                "image_url": "",
                 "cloudinary_id": ""
               },
               {
@@ -376,7 +376,7 @@
                 "price": 8,
                 "is_recommended": true,
                 "is_hidden": false,
-                "image_url": "/images/basico.png",
+                "image_url": "",
                 "cloudinary_id": ""
               },
               {
@@ -386,7 +386,7 @@
                 "price": 5,
                 "is_recommended": false,
                 "is_hidden": false,
-                "image_url": "/images/basico.png",
+                "image_url": "",
                 "cloudinary_id": ""
               },
               {
@@ -396,7 +396,7 @@
                 "price": 5,
                 "is_recommended": false,
                 "is_hidden": false,
-                "image_url": "/images/basico.png",
+                "image_url": "",
                 "cloudinary_id": ""
               }
             ]

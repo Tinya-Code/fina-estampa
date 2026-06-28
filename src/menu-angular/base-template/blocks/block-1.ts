@@ -32,9 +32,10 @@ import { TemplateSectionTitleComponent } from "../components/template-section-ti
               [description]="cat.description || ''"
             ></app-template-section-title>
             <div class="grid grid-cols-2  md:grid-cols-3 gap-8 ">
-              @for (product of cat.products; track product.id) {
+              @for (product of cat.products; track product.id; let i = $index) {
                 <app-template-card
                   [product]="product"
+                  [index]="i"
                   (productClick)="productClick.emit($event)"
                   (addToCart)="addToCart.emit($event)"
                 >

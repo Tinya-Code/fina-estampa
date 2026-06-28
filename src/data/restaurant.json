@@ -34,7 +34,7 @@
         "social_media": {
           "tiktok": "https://www.tiktok.com/@fina_estampa.restobar?is_from_webapp=1&sender_device=pc",
           "facebook": "https://www.facebook.com/profile.php?id=61578311416144",
-          "instagram": "https://www.instagram.com/finaestampa_cieneguilla/"
+          "instagram": "https://www.instagram.com/finaestampa_cieneguilla?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
         },
         "business_hours": {
           "monday": {
@@ -74,11 +74,10 @@
           }
         },
         "delivery_zones": [
-          "Cieneguilla",
-          "Manchay"
+          "Cieneguilla"
         ]
       },
-      "description": "En Fina Estampa celebramos la esencia criolla con un toque de distinción; aquí cada detalle está pensado para que vivas momentos únicos y memorables.",
+      "description": "Antiguo Monasterio, lugar que guarda en cada rincón nuestra cultura cieneguillera, donde la historia cobra vida en la gastronomía, los eventos especiales y cada experiencia.",
       "tags": [
         "chifa",
         "comida china",

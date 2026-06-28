@@ -15,6 +15,7 @@ export class AddButtonComponent {
   // Additional CSS classes for customization
   customClass = input<string>('');
   disabled = input<boolean>(false);
+  iconSize = input<string>('h-6 w-6');
   readonly Plus = Plus;
 
   // Click event

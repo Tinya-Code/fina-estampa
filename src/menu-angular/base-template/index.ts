@@ -51,7 +51,7 @@ import { BlockPromotionsComponent } from './blocks/block-promotions';
 
     <app-layout-scale>
       <div
-        class="bg-repeat relative mx-2"
+        class=" relative mx-2  bg-[url('/images/fondo-carta.svg')]  bg-contain "
       >
         @if (hasBlocks() || hasCombos() || hasPromotions()) {
           <div class=" h-full w-auto mx-2 py-12">

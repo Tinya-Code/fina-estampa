@@ -16,6 +16,7 @@ import { CommonModule } from '@angular/common';
 })
 export class TemplateCardComponent {
   product = input.required<Product>();
+  index = input.required<number>();
   productClick = output<Product>();
   addToCart = output<Product>();
 
