@@ -52,20 +52,19 @@ export class ComboCardComponent {
 
   readonly clipPathClass = computed(() => {
     return this.index() % 2 === 0 
-      ? '[clip-path:polygon(20%_0,80%_0,100%_100%,0_100%)]' 
-      : '[clip-path:polygon(0_0,100%_0,80%_100%,20%_100%)]';
+      ? '[clip-path:polygon(0_0,100%_20%,100%_80%,0_100%)]' 
+      : '[clip-path:polygon(0_20%,100%_0,100%_100%,0_80%)]';
   });
 
   readonly translateValue = computed(() => {
     if (this.index() === 0) return '';
-    const multiplier = this.isDesktop() ? 5 : 3;
-    return `translateX(-${this.index() * multiplier}rem)`;
+    const multiplier = this.isDesktop() ? 4.5 : 4;
+    return `translateY(-${this.index() * multiplier}rem)`;
   });
 
 private readonly colors = [
-  'bg-accent',
-  'bg-surface',
-  'bg-background',
+  'bg-[radial-gradient(circle_at_70%_50%,var(--color-primary-opaque),var(--color-primary))]',
+  'bg-[radial-gradient(circle_at_30%_50%,var(--color-surface),var(--color-surface-opaque))]',
 ];
 
   readonly colorClass = computed(() => {

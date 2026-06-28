@@ -11,15 +11,17 @@ import { SliderComponent } from '../../components/slider/slider.component';
   imports: [ComboCardComponent, TemplateSectionTitleComponent, SliderComponent],
   template: `
     @if (combos().length > 0) {
-      <section class="relative py-12 px-8">
+      <section class="relative ">
         <app-template-section-title [title]="title()" [description]="description()">
         </app-template-section-title>
-
-        <app-slider [showArrows]="true" [autoSlide]="false">
-          @for (combo of combos(); track combo.id; let i = $index) {
-            <app-combo-card [combo]="combo" [index]="i" (addToCart)="addToCart.emit($event)"> </app-combo-card>
-          }
-        </app-slider>
+        <section class="flex flex-col h-210 md:h-230">
+         @for (combo of combos(); track combo.id; let i = $index) {
+            <app-combo-card  [combo]="combo" [index]="i" (addToCart)="addToCart.emit($event)"> </app-combo-card>
+         }
+        </section>
+       <!-- <app-slider [showArrows]="true" [autoSlide]="false">
+ 
+        </app-slider> -->
       </section>
     }
   `,

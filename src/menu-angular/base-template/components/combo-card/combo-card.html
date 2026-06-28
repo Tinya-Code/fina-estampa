@@ -1,70 +1,97 @@
 <div
-  class="group relative p-6 {{ clipPathClass() }} {{ colorClass() }}  transition-all duration-300 overflow-hidden cursor-pointer active:scale-100  flex flex-col"
+  class="group relative p-6 {{ clipPathClass() }} {{ colorClass() }} min-h-80 md:min-h-90 transition-all duration-300 overflow-hidden cursor-pointer active:scale-100  flex flex-col justify-center items-center"
   [style.transform]="translateValue()"
 >
   @if (index() % 2 === 0) {
-    <!-- Layout 1: Image on top -->
-    <div class="relative flex flex-col h-full gap-4">
-      <div class="relative w-60 md:w-50 h-50  md:h-80 mx-auto rounded-full border flex flex-col justify-center items-center border-white group">
-        <img
-          [src]="combo().url"
-          [alt]="combo().name"
-          [title]="combo().name"
-          class="w-50 md:w-full h-auto transition-transform duration-300"
-        />
+
+  <!-- Layout 2: Image on bottom -->
+  <div
+    class="relative grid grid-cols-3 h-full w-full justify-items-center gap-4"
+  >
+    <div class="flex-1 flex flex-col justify-center items-center gap-3">
+      <h3 class="text-4xl font-display text-surface text-center">
+        {{ combo().name }}
+      </h3>
+      <div class="flex gap-3">
         <p
-          class="absolute -bottom-4 left-4 md:-left-4 translate-x-1/2 py-1 px-4  rounded-full tracking-widest bg-primary font-display text-white text-xl"
+          class="text-surface/80 max-w-xs text-center font-body leading-relaxed line-clamp-3"
         >
-          {{ combo().price | precio }}
+          {{ combo().description }}
         </p>
-        @if (canOrder()) {
-          <app-add-button
-            customClass="absolute bottom-0 -right-5 border-px border-white active"
-            (clicked)="addToCart.emit(combo())"
-          ></app-add-button>
-        }
       </div>
 
-      <div class="flex-1 flex flex-col gap-3">
-        <h3 class="text-3xl font-display text-primary-text text-center">{{ combo().name }}</h3>
-        <div class="flex gap-3 mt-auto">
-          <p class="text-primary-text/70 max-w-xs text-center font-body leading-relaxed line-clamp-3">
-            {{ combo().description }}
-          </p>
-        </div>
+      <p
+        class="py-1 px-4 rounded-full tracking-widest border-2 border-white font-display text-white text-xl"
+      >
+        {{ combo().price | precio }}
+      </p>
+    </div>
+
+    <div
+      class="relative w-50 md:w-60 col-span-2 rounded-full border flex flex-col justify-center items-center border-white group"
+    >
+      <img
+        [src]="combo().url"
+        [alt]="combo().name"
+        [title]="combo().name"
+        class="w-50 h-50 md:w-60 md:h-60 transition-transform duration-300"
+      />
+      <div class="h-0 flex w-auto mx-auto">
+        @if (canOrder()) {
+        <app-add-button
+          customClass=" -translate-y-8 flex text-white justify-center items-center font-semibold font-body! text-lg!  active"
+          (clicked)="addToCart.emit(combo())"
+          text="Ordenar ahora"
+        ></app-add-button>
+        }
       </div>
     </div>
+  </div>
+
   } @else {
-    <!-- Layout 2: Image on bottom -->
-    <div class="relative flex flex-col h-full gap-4">
-      <div class="flex-1 flex flex-col gap-3">
-        <h3 class="text-3xl font-display text-primary-text text-center">{{ combo().name }}</h3>
-        <div class="flex gap-3 mt-auto">
-          <p class="text-primary-text/70 max-w-xs text-center font-body leading-relaxed line-clamp-3">
-            {{ combo().description }}
-          </p>
-        </div>
-      </div>
-
-      <div class="relative  w-60 md:w-50 h-50 md:h-80 mx-auto rounded-full border flex flex-col justify-center items-center border-white group">
-        <img
-          [src]="combo().url"
-          [alt]="combo().name"
-          [title]="combo().name"
-          class="w-50 md:w-full h-auto transition-transform duration-300"
-        />
-        <p
-          class="absolute -bottom-4  left-4 md:-left-4 translate-x-1/2 py-1 px-4 rounded-full tracking-widest bg-primary font-display text-white text-xl"
-        >
-          {{ combo().price | precio }}
-        </p>
+  <!-- Layout 1: Image on top -->
+  <div
+    class="relative grid grid-cols-3 h-full w-full justify-items-center gap-4"
+  >
+    <div
+      class="relative w-50 md:w-60 col-span-2 rounded-full border flex flex-col justify-center items-center border-primary group"
+    >
+      <img
+        [src]="combo().url"
+        [alt]="combo().name"
+        [title]="combo().name"
+        class="w-50 h-50 md:w-60 md:h-60 transition-transform duration-300"
+      />
+      <div class="h-0 flex w-auto mx-auto">
         @if (canOrder()) {
-          <app-add-button
-            customClass="absolute bottom-0 -right-5 border-px border-white active"
-            (clicked)="addToCart.emit(combo())"
-          ></app-add-button>
+        <app-add-button
+          customClass=" -translate-y-8 flex text-white justify-center items-center font-semibold font-body! text-lg!  active"
+          (clicked)="addToCart.emit(combo())"
+          text="Ordenar ahora"
+        ></app-add-button>
         }
       </div>
     </div>
+
+    <div class="flex-1 flex flex-col justify-center items-center gap-3">
+      <h3 class="text-4xl font-display text-primary-text text-center">
+        {{ combo().name }}
+      </h3>
+      <div class="flex gap-3">
+        <p
+          class="text-primary-text/70 max-w-xs text-center font-body leading-relaxed line-clamp-3"
+        >
+          {{ combo().description }}
+        </p>
+      </div>
+
+      <p
+        class="py-1 px-4 rounded-full tracking-widest bg-white font-display text-primary border-2 border-primary text-xl"
+      >
+        {{ combo().price | precio }}
+      </p>
+    </div>
+  </div>
+
   }
 </div>

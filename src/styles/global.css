@@ -8,7 +8,9 @@
   --color-surface: #f4f4f5;
   --color-accent: #f9a243;
   --color-highlight: #f9a243;
-  --font-display:"Expose-Bold" , serif;
+  --color-primary-opaque: #0f203ecc;
+  --color-surface-opaque: #f4f4f5cc;
+  --font-display: "Expose-Bold", serif;
   --font-body: "Poppins", sans-serif;
 }
 

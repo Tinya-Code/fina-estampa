@@ -42,7 +42,7 @@ export class Menu implements OnInit {
   private readonly _businessHours = inject(BusinessHoursService);
 
   // UI State
-  readonly isLoading = signal(true);
+  readonly isLoading = signal(false);
   readonly selectedProduct = signal<any | null>(null);
 
   // Data signals

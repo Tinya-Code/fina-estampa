@@ -23,6 +23,7 @@ import {
   Instagram,
   MessageCircleCode,
 } from "lucide-angular";
+import { RestaurantService } from "../../../menu-angular/core/services/restaurant.service";
 
 @Component({
   selector: "app-header",
@@ -35,6 +36,8 @@ export class HeaderComponent {
 
   isMenuOpen = signal(false);
   currentPath = signal("");
+
+  private readonly restaurantService = inject(RestaurantService);
 
   // Lucide icons
   readonly X = X;
@@ -100,24 +103,29 @@ export class HeaderComponent {
       href: "/contacto-fina-estampa",
       icon: this.CalendarDays,
     },
-    socials: [
+  };
+
+  readonly socials = computed(() => {
+    const socialMedia = this.restaurantService.socialMedia();
+    return [
       {
         name: "Instagram",
-        href: "https://instagram.com/finaestampa",
+        href: socialMedia?.instagram || "https://instagram.com/finaestampa",
         icon: this.Instagram,
       },
       {
         name: "WhatsApp",
-        href: "https://wa.me/51942235532",
+        href: `https://wa.me/${this.restaurantService.whatsappConfig()?.number || "51942235532"}`,
         icon: this.MessageCircleCode,
       },
-    ],
-    contact: {
-      email: "contacto@finaestampa.pe",
-      phone: "+51 942 235 532",
-      address: "Cieneguilla, Lima, Perú",
-    },
-  };
+    ];
+  });
+
+  readonly contact = computed(() => ({
+    email: "contacto@finaestampa.pe",
+    phone: this.restaurantService.restaurant()?.phone || "+51 942 235 532",
+    address: this.restaurantService.restaurant()?.address || "Cieneguilla, Lima, Perú",
+  }));
 
   isMinimal = computed(() => this.variant() === "minimal");
 
